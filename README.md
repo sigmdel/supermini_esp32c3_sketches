@@ -22,7 +22,8 @@
 
 ## 1. Introduction
 
-The Super Mini ESP32C3 boards are a small simplified versions of the original Espressif development boards for the ESP32C microcontroller. Unlike older Espressif microcontrollers these boards have a RISC-V core. It should be possible to compile each project with PlatformIO, and in the Arduino IDE and then upload them to the Super Mini. 
+The Super Mini ESP32C3 boards are a small simplified versions of the original Espressif development boards for the ESP32C microcontroller. Unlike older Espressif microcontrollers these boards have a RISC-V core. It should be possible to compile each project  in the Arduino IDE and in PlatformIO. 
+
 ## 2. Arduino IDE Notes
 
 Arduino sketches must have an `.ino` file name extension and must be contained in a directory that has the same name as the Arduino sketch (excluding the extension). Consequenty the `01_pin_names` project containts a directory named `pin_names` that in turn contains the Arduino sketch `pin_names.ino`. That sketch is basically empty as it is a long comment only. This is not a problem because the Arduino IDE will import all source files found in the sketch directory. The actual code is in `main.cpp` which is the default name of a PlatformIO project.
@@ -31,12 +32,11 @@ Arduino sketches must have an `.ino` file name extension and must be contained i
 
 To compile and then upload the sketch in the Arduino IDE, click on the **File** top menu, click on **Open...**, then navigate to the `pin_names.ino` file and open it with the system file manager.
 
-Following the instructions in [Installing using Arduino IDE](https://docs.espressif.com/projects/arduino-esp32/en/latest/installing.html#installing-using-arduino-ide) the development release of the Arduino-ESP32 framework was installed by entering the following URL 
+Following the instructions in [Installing using Arduino IDE](https://docs.espressif.com/projects/arduino-esp32/en/latest/installing.html#installing-using-arduino-ide) the latest release of the Arduino-ESP32 framework was installed by entering the following URL 
 ```
-https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_dev_index.json
+https://espressif.github.io/arduino-esp32/package_esp32_dev_index.json
 ```
-into the `Additional Board Manager URLs` field of the Arduino Preferences.
-
+into the `Additional Board Manager URLs` field of the Arduino Preferences. Using the board manager install the Espressif Arduino core `esp32 version 3.0.0-rc1` or newer. It should then be possible to select `MakerGO ESP32 C3 SuperMini` as the board.
 
 ## 3. PlatformIO Notes
 
@@ -53,12 +53,23 @@ PlatformIO will "convert" the Arduino sketch, but that is of no consequence sinc
 ## 4. List of Projects      
 
 ### 01_pin_names
-### 02_blink_pulse_led
-### 03_scan_wifi
-### 04_wifi_connect
-### 05_wifi_tx_power
-### 06_async_web_led
+  Lists the I/O pin names and numbers of the Super Mini ESP32-C3 board.
 
+### 02_blink_pulse_led
+  Alternately blinks (heartbeat) and pulses the on board LED of the Super Mini board.
+
+### 03_scan_wifi
+  Prints a list of available Wi-Fi networks every five seconds. The Super Mini do not manage to find as many networks as the XIAO ESP32C3. Edit `secrets.h.template` and save as `secrets.h` before compiling.
+  
+### 04_wifi_connect
+  Wi-Fi station connect example. The Super Mini may very well fail to connect. Define the TRY_TX_POWER macro to see if that solves the problem. It may be necessary to change the value of the TX_POWER define. Edit `secrets.h.template` and save as `secrets.h` before compiling.
+
+### 05_wifi_tx_power
+  Tests each possible value for the Wi-Fi tx power and records the time required to connect to the Wi-Fi network. Edit `secrets.h.template` and save as `secrets.h` before compiling.     
+
+### 06_async_web_led
+  Toggles the built-in LED on and off with a Web interface. May be necessary to specify a valid Wi-Fi tx power as determined with the previous sketch. Edit `secrets.h.template` and save as `secrets.h` before compiling. Not yet tested in the Arduino IDE.
+  
 ## 5. License
 
 Copyright 2024, Michel Deslierres. No rights reserved. 
