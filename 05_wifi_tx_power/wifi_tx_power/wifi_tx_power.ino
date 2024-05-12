@@ -1,9 +1,8 @@
 /*
  * wifi_tx_power.ino
  *
- * List I/O pin names and numbers of supported Super Mini ESP32-C3 boards
- *     - Nologo ESP32C3 Super Mini
- *     - MakerGO C3 SuperMini
+ * Tests each possible value for the Wi-Fi tx power and records
+ * the time required to connect to the Wi-Fi network.
  *
  * In the Arduino IDE use board 'Nologo ESP32C3 Super Mini' or 
  * 'MakerGO C3 SuperMini'. These board definitions for the 

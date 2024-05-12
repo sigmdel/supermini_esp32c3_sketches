@@ -1,7 +1,7 @@
 /*
  * async_web_led.ino
  *
- * Toggle an external LED on and off with a push button switch
+ * Toggles the built-in LED on and off with a Web interface
  *
  * This is a stub to satisfy the Arduino IDE, the source code is in
  * the file main.cpp in the same directory.
