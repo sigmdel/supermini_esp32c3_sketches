@@ -67,9 +67,29 @@ PlatformIO will "convert" the Arduino sketch, but that is of no consequence sinc
 ### 05_wifi_tx_power
   Tests each possible value for the Wi-Fi tx power and records the time required to connect to the Wi-Fi network. Edit `secrets.h.template` and save as `secrets.h` before compiling.     
 
+  The table shows times needed to connect to a Wi-Fi network in milliseconds as a function of the radio TX power setting. The tests were run only once on a XIAO ESP32C3 and once on each of four different Super Mini boards. The `-` signifies that a connection was not made within two minutes. 
+
+|                           |  XIAO	|	SM 1 |	SM 2 | SM 3	|	SM 4 |
+| ---                       | :---: |	:---:| :---: | :---:|	:---:|
+|	      WIFI_POWER_default 	|	1143	|	-	|	-	|	- 	|	- 	|
+|	      WIFI_POWER_19_5dBm 	|	443	|	-	|	1230	|	- 	|	- 	|
+|	        WIFI_POWER_19dBm 	|	430	|	477	|	-	|	- 	|	-	|
+|	      WIFI_POWER_18_5dBm 	|	440	|	546	|	961	|	- 	|	- 	|
+|	        WIFI_POWER_17dBm 	|	391	|	443	|	389	|	532	|	- 	|
+|	        WIFI_POWER_15dBm 	|	404	|	410	|	425	|	422	|	- 	|
+|	        WIFI_POWER_13dBm 	|	376	|	729	|	684	|	469	|	1440	|
+|	        WIFI_POWER_11dBm 	|	429	|	423	|	399	|	409	|	484	|
+|	       WIFI_POWER_8_5dBm 	|	729	|	1929	|	414	|	425	|	443	|
+|	         WIFI_POWER_7dBm 	|	1923	|	718	|	413	|	430	|	399	|
+|	         WIFI_POWER_5dBm 	|	904	|	388	|	427	|	546	|	442	|
+|	         WIFI_POWER_2dBm 	|	678	|	507	|	390	|	937	|	408	|
+
+Two conclusions can be drawn. The XIAO connected with the Wi-Fi router which was only a meter away no matter the TX power setting. None of the four Simple Mini was able to connect to the Wi-Fi network with the default TX power setting.
+
 ### 06_async_web_led
   Toggles the built-in LED on and off with a Web interface. May be necessary to specify a valid Wi-Fi tx power as determined with the previous sketch. Edit `secrets.h.template` and save as `secrets.h` before compiling. Not yet tested in the Arduino IDE.
   
+  Asside from setting the radio TX power and handling of an active LOW LED, this project is the same as **05_async_web_led** in [xiao_esp32c3_sketches](https://github.com/sigmdel/xiao_esp32c3_sketches).
 ## 5. License
 
 Copyright 2024, Michel Deslierres. No rights reserved. 
