@@ -15,7 +15,8 @@
   - [03_scan_wifi](#03_scan_wifi)
   - [04_wifi_connect](#04_wifi_connect)
   - [05_wifi_tx_power](#05_wifi_tx_power)
-  - [06supermini_esp32c3_sketches (github)% _async_web_led](#06-_async_web_led)
+  - [06_async_web_led](#06_async_web_led)
+  - [07_ble_led](#07_ble_led)
 - [5. License](#5-license)
 
 <!-- /TOC -->
