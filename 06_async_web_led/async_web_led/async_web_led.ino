@@ -3,16 +3,14 @@
  *
  * Toggles the built-in LED on and off with a Web interface
  *
- * This is a stub to satisfy the Arduino IDE, the source code is in
- * the file main.cpp in the same directory.
- *
- * This sketch will compile in the Arduino IDE and in PlatformIO
+ * This sketch runs in PlatformIO but it will not compile in the 
+ * Arduino IDE with version 3.0.1 of esp32 core
  *
  * Michel Deslierres
- * February 27, 2023
+ * June 21, 2023
  *
  *
- * Copyright 2023, Michel Deslierres. No rights reserved, this code is in the public domain.
+ * Copyright 2024, Michel Deslierres. No rights reserved, this code is in the public domain.
  * In those jurisdictions where this may be a problem, the BSD Zero Clause License applies.
  * <https://spdx.org/licenses/0BSD.html>
  */

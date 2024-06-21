@@ -8,6 +8,14 @@
 #include "html.h"
 #include "secrets.h"
 
+#ifndef PLATFORMIO
+// WiFi.setTxPower(TX_POWER) may be needed for some SuperMini C3 boards
+// If using Arduino define TX_POWER here if needed:
+#define TX_POWER WIFI_POWER_11dBm
+// For PlatformIO, TX_POWER is defined in the platformio.ini config file.
+// Similarly
+//#define LED_ON LOW
+#endif
 
 #if defined(ARDUINO_MAKERGO_C3_SUPERMINI)
   #define TITLE "MakerGO C3 SuperMini WEB SERVER"
@@ -52,10 +60,10 @@ int ledState = 0;
 String ledStatus = "OFF";
 
 void setLed(int value) {
-  digitalWrite(ledPin, (value)? LED_ON : 1-LED_ON);
+  digitalWrite(ledPin, (value)? ledOn : 1-ledOn);
   ledState = value;
-  ledStatus = ((digitalRead(ledPin) == LED_ON) ? "ON" : "OFF");
-  Serial.printf("LED now %s.\n", ledStatus);
+  ledStatus = ((digitalRead(ledPin) == ledOn) ? "ON" : "OFF");
+  Serial.printf("LED now %s.\n", ledStatus.c_str());
 }
 
 void toggleLed(void) {
@@ -67,7 +75,7 @@ AsyncWebServer server(80);
 
 // Template substitution function
 String processor(const String& var){
-  if (var == "LEDSTATUS") return String(ledStatus);
+  if (var == "LEDSTATUS") return String(l;default_envs = seeed_xiao_esp32c3edStatus);
   if (var == "SERVERNAME") return String(TITLE);
   return String(); // empty string
 }

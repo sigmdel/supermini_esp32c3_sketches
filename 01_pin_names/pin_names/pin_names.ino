@@ -30,10 +30,6 @@
  * definition file pins_arduino.h have been added as explained in
  * https://github.com/sigmdel/supermini_esp32c3_sketches/tree/main/resources
  * 
- * 'BUILTIN_LED' and 'LED_BUILTIN' will not be correct with these
- * three board definitions.
- *
- *
  * Michel Deslierres
  * May 8, 2024
  *

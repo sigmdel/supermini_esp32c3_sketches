@@ -55,7 +55,7 @@ void start_connecting(void) {
     if (count > 4)            // making sure that data was wiped
       WiFi.begin();
       /* will fail
-            Connecting to COROBRUN-2
+            Connecting to WiFi access point
             [ 42188][E][WiFiSTA.cpp:317] begin(): connect failed! 0x300a
          and esp_err_to_name(0x300a) --> "ESP_ERR_WIFI_SSID"
          proving that a valid SSID is no longer in NVS
