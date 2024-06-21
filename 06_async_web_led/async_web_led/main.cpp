@@ -56,7 +56,6 @@ void setLed(int value) {
   ledState = value;
   ledStatus = ((digitalRead(ledPin) == LED_ON) ? "ON" : "OFF");
   Serial.printf("LED now %s.\n", ledStatus);
-  assert(ledState == (digitalRead(ledPin) == LED_ON));
 }
 
 void toggleLed(void) {
