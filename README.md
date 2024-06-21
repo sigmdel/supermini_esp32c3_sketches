@@ -15,14 +15,14 @@
   - [03_scan_wifi](#03_scan_wifi)
   - [04_wifi_connect](#04_wifi_connect)
   - [05_wifi_tx_power](#05_wifi_tx_power)
-  - [06_async_web_led](#06-_async_web_led)
+  - [06supermini_esp32c3_sketches (github)% _async_web_led](#06-_async_web_led)
 - [5. License](#5-license)
 
 <!-- /TOC -->
 
 ## 1. Introduction
 
-The Super Mini ESP32C3 boards are a small simplified versions of the original Espressif development boards for the ESP32-C3 microcontroller. Unlike older Espressif microcontrollers, the C3 has a RISC-V core. 
+The Super Mini ESP32C3 boards are small simplified versions of the original Espressif development boards for the ESP32-C3 microcontroller. Unlike older Espressif microcontrollers, the C3 has a RISC-V core. 
 
 It seems that there is more than one manufacturer of these boards that differ in more or less subtle ways. The pin diagram above shows the markings on four boards purchased from a Chinese vendor in late April 2024. There are no labels identifying the red power LED to the left of the USB connector and the blue LED under the reset (RST) button. There are no other components near the single component between the ESP32-C3 chip and the red ceramic antenna labelled C3. Other boards and the [schematic](https://wiki.icbbuy.com/doku.php?id=developmentboard:esp32-c3mini#schematic) have other components which may explain the problems encountered with Wi-Fi connectivity. 
 
@@ -48,7 +48,7 @@ Because of the Arduino sketch naming constraints, the `main.cpp` file of a proje
 
 ```ini
 [platformio]
-; Make the Arduino IDE happy (.INO file must be in a directory of the same name)
+; Make the Arduino IDE happysupermini_esp32c3_sketches (github)%  (.INO file must be in a directory of the same name)
 src_dir = pin_names
 ```
 
@@ -71,13 +71,13 @@ The projects can be grouped in three categories.
 ---
 
 ### 03_scan_wifi
-  Prints a list of available Wi-Fi networks every five seconds. The Super Mini do not manage to find as many networks as the XIAO ESP32C3. Edit `secrets.h.template` and save as `secrets.h` before compiling.
+  Prints a list of available Wi-Fi networks every five seconds. The Super Mini does not manage to find as many networks as the XIAO ESP32C3. Edit `secrets.h.template` and save as `secrets.h` before compiling.
   
 ### 04_wifi_connect
   Wi-Fi connection example. The Super Mini may very well fail to connect. Define the TRY_TX_POWER macro to see if that solves the problem. It may be necessary to change the value of the TX_POWER macro. Edit `secrets.h.template` and save as `secrets.h` before compiling.
 
 ### 05_wifi_tx_power
-  Tests each pre-defined value for the Wi-Fi TX (transmit) power and records the time required to connect to the Wi-Fi network. Edit `secrets.h.template` and save as `secrets.h` before compiling.     
+  Tests each predefined value for the Wi-Fi TX (transmit) power and records the time required to connect to the Wi-Fi network. Edit `secrets.h.template` and save as `secrets.h` before compiling.     
 
   The table shows times needed to connect to a Wi-Fi network in milliseconds as a function of the radio TX power setting. The tests were run only once on a XIAO ESP32C3 and once on each of four different Super Mini boards. The `-` signifies that a connection was not made within two minutes. 
 
@@ -100,7 +100,7 @@ Three conclusions can be drawn.
 
   1. The XIAO connected with the Wi-Fi router no matter the TX power setting. That may not be all that significant since the router was 1 metre away.
   
-  2. Not one of the four Super Mini board was able to connect to the Wi-Fi network with the default TX power setting.
+  2. Not one of the four Super Mini boards was able to connect to the Wi-Fi network with the default TX power setting.
 
   3. There is significant variation between the Super Mini boards. 
   
@@ -116,9 +116,9 @@ Toggles the built-in LED on and off with a Web interface. It may be necessary to
   
 Aside from setting the radio TX power and handling the fact that the built-in LED is active LOW, this project is the same as **05_async_web_led** in [xiao_esp32c3_sketches](https://github.com/sigmdel/xiao_esp32c3_sketches).
 
-This project cannot easily be compiled in the Arduino IDE
+This project cannot easily be compiled in the Arduino IDE:
 
-> The uses the `esphome/ESPAsyncWebServer-esphome@^3.2.0` library which in turns depends on the `AsyncTCP` library. The latter depends on `IPv6Address.h` which is no longer included in the esp32 v3.0.1 core used in Arduino. So the `esphome` libraries cannot be copied to a private library directory for use in Arduino unless esp32 v2.0.17 were used (see [ptillisch](https://forum.arduino.cc/t/ide-2-3-2-ip46address-h-error/1272197/4)). If the older esp32 core were used, the `MakerGO ESP32 C3 SuperMini board` would not be defined. If we use v3.0.1, it seems that the `ESPAsyncWebServer` library loaded by the Arduino library manager which presumably does not require `IPv6Address.h` does not seem to support the ESP32-C3.  
+> The project uses the `esphome/ESPAsyncWebServer-esphome@^3.2.0` library which in turns depends on the `AsyncTCP` library. The latter depends on `IPv6Address.h` which is no longer included in the esp32 v3.0.1 core used in Arduino. So the `esphome` libraries cannot be copied to a private library directory for use in Arduino unless esp32 v2.0.17 were used (see [ptillisch](https://forum.arduino.cc/t/ide-2-3-2-ip46address-h-error/1272197/4)). If the older esp32 core were used, the `MakerGO ESP32 C3 SuperMini board` would not be defined. If we use v3.0.1, it seems that the `ESPAsyncWebServer` library loaded by the Arduino library manager which presumably does not require `IPv6Address.h` does not seem to support the ESP32-C3.  
 
 ## 5. Licence
 
