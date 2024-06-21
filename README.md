@@ -120,6 +120,15 @@ This project cannot easily be compiled in the Arduino IDE:
 
 > The project uses the `esphome/ESPAsyncWebServer-esphome@^3.2.0` library which in turns depends on the `AsyncTCP` library. The latter depends on `IPv6Address.h` which is no longer included in the esp32 v3.0.1 core used in Arduino. So the `esphome` libraries cannot be copied to a private library directory for use in Arduino unless esp32 v2.0.17 were used (see [ptillisch](https://forum.arduino.cc/t/ide-2-3-2-ip46address-h-error/1272197/4)). If the older esp32 core were used, the `MakerGO ESP32 C3 SuperMini board` would not be defined. If we use v3.0.1, it seems that the `ESPAsyncWebServer` library loaded by the Arduino library manager which presumably does not require `IPv6Address.h` does not seem to support the ESP32-C3.  
 
+### 07_ble_led
+
+A rudimentary example of the Bluetooth® Low Energy (BLE) capabilities of the ESP32-C3. The microcontroller is set up as a BLE peripheral with a LED service and as switch characteristic. Any central (client) device can turn the LED on or off by sending a proper message. [Bluetooth Controlled LED](https://sigmdel.ca/michel/ha/xiao/xiao_esp32c3_intro_en.html#ble) explains how to use **LightBlue**, an Android and presumably IOS application, to do that.
+
+The Super Mini C3 boards that were tested did not do well. Sometimes the connection between the microcontroller and the Android tablet would require a considerable amount of time. At other times, the tablet had to be almost touching the microcontroller for the connection to be made. It happened that a connection could not be established at all even if **LightBlue** had found the Super Mini when it scanned for devices. By contrast, the XIAO-ESP32C3 was dependable.
+
+This project is basically the same as **06_ble_led** in [xiao_esp32c3_sketches](https://github.com/sigmdel/xiao_esp32c3_sketches). Contrary what is stated in the documentation for that previous version, the project can be compiled in the Arduino IDE. It's definitely not properly set up for that. The `ble_led.ino` file has details on how to do it. 
+
+
 ## 5. Licence
 
 Copyright 2024, Michel Deslierres. No rights reserved. 
