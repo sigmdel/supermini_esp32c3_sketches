@@ -22,11 +22,15 @@
 
 ## 1. Introduction
 
-The Super Mini ESP32C3 boards are a small simplified versions of the original Espressif development boards for the ESP32C microcontroller. Unlike older Espressif microcontrollers these boards have a RISC-V core. It should be possible to compile each project  in the Arduino IDE and in PlatformIO. 
+The Super Mini ESP32C3 boards are a small simplified versions of the original Espressif development boards for the ESP32-C3 microcontroller. Unlike older Espressif microcontrollers, the C3 has a RISC-V core. 
+
+It seems that there is more than one manufacturer of these boards that differ in more or less subtle ways. The pin diagram above shows the markings on four boards purchased from a Chinese vendor in late April 2024. There are no labels identifying the red power LED to the left of the USB connector and the blue LED under the reset (RST) button. There are no other components near the single component between the ESP32-C3 chip and the red ceramic antenna labelled C3. Other boards and the [schematic](https://wiki.icbbuy.com/doku.php?id=developmentboard:esp32-c3mini#schematic) have other components which may explain the problems encountered with Wi-Fi connectivity. 
+
+It should be possible to compile each project  in the Arduino IDE and in PlatformIO. 
 
 ## 2. Arduino IDE Notes
 
-Arduino sketches must have an `.ino` file name extension and must be contained in a directory that has the same name as the Arduino sketch (excluding the extension). Consequenty the `01_pin_names` project containts a directory named `pin_names` that in turn contains the Arduino sketch `pin_names.ino`. That sketch is basically empty as it is a long comment only. This is not a problem because the Arduino IDE will import all source files found in the sketch directory. The actual code is in `main.cpp` which is the default name of a PlatformIO project.
+Arduino sketches must have an `.ino` file name extension and must be contained in a directory that has the same name as the Arduino sketch (excluding the extension). Consequently the `01_pin_names` project contains a directory named `pin_names` that in turn contains the Arduino sketch `pin_names.ino`. That file is only a long comment. This is not a problem because the Arduino IDE will import all source files found in the sketch directory. The actual code is in `main.cpp` which is the default name of a PlatformIO project.
 
 ![Directory tree](images/dir_tree.jpg) 
 
@@ -40,7 +44,7 @@ into the `Additional Board Manager URLs` field of the Arduino Preferences. Using
 
 ## 3. PlatformIO Notes
 
-Because of the Arduino sketch naming constraints, the `main.cpp` file of a project is not stored in the `src` directory. To work around this change, a `src_dir` entry is added in the `platformio.ini` file to provide the name of the directory in which `main.cpp` is found. That will be the name of the Arduino sketch as shown here for the `01_pin_names` project. 
+Because of the Arduino sketch naming constraints, the `main.cpp` file of a project is not stored in the default `src` directory. A `src_dir` entry in the `platformio.ini` configuration file provides the name of the directory in which `main.cpp` is found. That will be the name of the Arduino sketch as shown below for the `01_pin_names` project. 
 
 ```ini
 [platformio]
@@ -48,24 +52,32 @@ Because of the Arduino sketch naming constraints, the `main.cpp` file of a proje
 src_dir = pin_names
 ```
 
-PlatformIO will "convert" the Arduino sketch, but that is of no consequence since it contains only comments.
+PlatformIO will "convert" the sketch `.ino` file, but that is of no consequence since it contains only comments.
 
 ## 4. List of Projects      
+
+The projects can be grouped in three categories. 
+
+**Hello World! sketches:**
+---
 
 ### 01_pin_names
   Lists the I/O pin names and numbers of the Super Mini ESP32-C3 board.
 
 ### 02_blink_pulse_led
-  Alternately blinks (heartbeat) and pulses the on board LED of the Super Mini board.
+  Alternately blinks (heartbeat) and pulses the on-board LED of the Super Mini board.
+
+**Wi-Fi Connectivity sketches:**
+---
 
 ### 03_scan_wifi
   Prints a list of available Wi-Fi networks every five seconds. The Super Mini do not manage to find as many networks as the XIAO ESP32C3. Edit `secrets.h.template` and save as `secrets.h` before compiling.
   
 ### 04_wifi_connect
-  Wi-Fi station connect example. The Super Mini may very well fail to connect. Define the TRY_TX_POWER macro to see if that solves the problem. It may be necessary to change the value of the TX_POWER define. Edit `secrets.h.template` and save as `secrets.h` before compiling.
+  Wi-Fi connection example. The Super Mini may very well fail to connect. Define the TRY_TX_POWER macro to see if that solves the problem. It may be necessary to change the value of the TX_POWER macro. Edit `secrets.h.template` and save as `secrets.h` before compiling.
 
 ### 05_wifi_tx_power
-  Tests each possible value for the Wi-Fi tx power and records the time required to connect to the Wi-Fi network. Edit `secrets.h.template` and save as `secrets.h` before compiling.     
+  Tests each pre-defined value for the Wi-Fi TX (transmit) power and records the time required to connect to the Wi-Fi network. Edit `secrets.h.template` and save as `secrets.h` before compiling.     
 
   The table shows times needed to connect to a Wi-Fi network in milliseconds as a function of the radio TX power setting. The tests were run only once on a XIAO ESP32C3 and once on each of four different Super Mini boards. The `-` signifies that a connection was not made within two minutes. 
 
@@ -84,13 +96,27 @@ PlatformIO will "convert" the Arduino sketch, but that is of no consequence sinc
 |	         WIFI_POWER_5dBm 	|	904	|	388	|	427	|	546	|	442	|
 |	         WIFI_POWER_2dBm 	|	678	|	507	|	390	|	937	|	408	|
 
-Two conclusions can be drawn. The XIAO connected with the Wi-Fi router which was only a meter away no matter the TX power setting. None of the four Simple Mini was able to connect to the Wi-Fi network with the default TX power setting.
+Three conclusions can be drawn. 
+
+  1. The XIAO connected with the Wi-Fi router no matter the TX power setting. That may not be all that significant since the router was 1 metre away.
+  
+  2. Not one of the four Super Mini board was able to connect to the Wi-Fi network with the default TX power setting.
+
+  3. There is significant variation between the Super Mini boards. 
+  
+When deploying a board, it may be necessary to test it multiple times in the position it will be used to find the proper TX power setting.
+
+
+**Working Example:**
+---
 
 ### 06_async_web_led
-  Toggles the built-in LED on and off with a Web interface. May be necessary to specify a valid Wi-Fi tx power as determined with the previous sketch. Edit `secrets.h.template` and save as `secrets.h` before compiling. Not yet tested in the Arduino IDE.
+
+Toggles the built-in LED on and off with a Web interface. It may be necessary to specify a valid Wi-Fi tx power as determined with the previous sketch. Edit `secrets.h.template` and save as `secrets.h` before compiling. Not yet tested in the Arduino IDE.
   
-  Asside from setting the radio TX power and handling of an active LOW LED, this project is the same as **05_async_web_led** in [xiao_esp32c3_sketches](https://github.com/sigmdel/xiao_esp32c3_sketches).
-## 5. License
+Aside from setting the radio TX power and handling the fact that the built-in LED is active LOW, this project is the same as **05_async_web_led** in [xiao_esp32c3_sketches](https://github.com/sigmdel/xiao_esp32c3_sketches).
+
+## 5. Licence
 
 Copyright 2024, Michel Deslierres. No rights reserved. 
 
