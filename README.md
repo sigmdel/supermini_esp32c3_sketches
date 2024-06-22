@@ -1,8 +1,18 @@
 # Super Mini ESP32C3 Arduino Sketches / PlatformIO Projects
 
-**Source code that accompanies the May 2024 version of [First Look at the Super Mini ESP32-C3](https://sigmdel.ca/michel/ha/esp8266/super_mini_esp32c3_en.html)**.
+**Source code that accompanies [First Look at the Super Mini ESP32-C3](https://sigmdel.ca/michel/ha/esp8266/super_mini_esp32c3_en.html).**
+
+---
+
+**Code source qui accompagne [Coup d'oeil sur la carte de développement Super Mini ESP32-C3](https://sigmdel.ca/michel/ha/esp8266/super_mini_esp32c3_en.html).**
+
+---
 
 ![Super Mini ESP32C3 Pinout](images/pinout_top_big_logo.png)
+
+---
+
+**Table of Content**
 
 <!-- TOC -->
 
