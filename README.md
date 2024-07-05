@@ -20,14 +20,24 @@
 - [2. Arduino IDE Notes](#2-arduino-ide-notes)
 - [3. PlatformIO Notes](#3-platformio-notes)
 - [4. List of Projects](#4-list-of-projects)
+
+  **Hello world! sketeches:**
   - [01_pin_names](#01_pin_names)
   - [02_blink_pulse_led](#02_blink_pulse_led)
+
+  **Wi-Fi connectivity sketches:**
   - [03_scan_wifi](#03_scan_wifi)
   - [04_wifi_connect](#04_wifi_connect)
   - [05_wifi_tx_power](#05_wifi_tx_power)
-  - [06_async_web_led](#06_async_web_led)
+  
+  **Bluetooth connectivity sketches**
   - [07_ble_led](#07_ble_led)
-- [5. License](#5-license)
+  - [08_ble_led2](#08_ble_led2)
+
+  **Working example:**
+  - [06_async_web_led](#06_async_web_led)
+
+  [5. Licence](#5-licence)
 
 <!-- /TOC -->
 
@@ -37,7 +47,9 @@ The Super Mini ESP32C3 boards are small simplified versions of the original Espr
 
 It seems that there is more than one manufacturer of these boards that differ in more or less subtle ways. The pin diagram above shows the markings on four boards purchased from a Chinese vendor in late April 2024. There are no labels identifying the red power LED to the left of the USB connector and the blue LED under the reset (RST) button. There are no other components near the single component between the ESP32-C3 chip and the red ceramic antenna labelled C3. Other boards and the [schematic](https://wiki.icbbuy.com/doku.php?id=developmentboard:esp32-c3mini#schematic) have other components which may explain the problems encountered with Wi-Fi connectivity. 
 
-It should be possible to compile the first five projects in the Arduino IDE and in PlatformIO, `async_web_led` does not compile in the Arduino IDE if version 3.0.1 of the `esp32` core is used.
+It should **Wi-Fi Connectivity sketches:**
+---
+be possible to compile the first five projects in the Arduino IDE and in PlatformIO, `async_web_led` does not compile in the Arduino IDE if version 3.0.1 of the `esp32` core is used.
 
 ## 2. Arduino IDE Notes
 
@@ -69,7 +81,7 @@ PlatformIO will "convert" the sketch `.ino` file, but that is of no consequence 
 
 The projects can be grouped in three categories. 
 
-**Hello World! sketches:**
+**Hello world! sketches:**
 ---
 
 ### 01_pin_names
@@ -78,7 +90,7 @@ The projects can be grouped in three categories.
 ### 02_blink_pulse_led
   Alternately blinks (heartbeat) and pulses the on-board LED of the Super Mini board.
 
-**Wi-Fi Connectivity sketches:**
+**Wi-Fi connectivity sketches:**
 ---
 
 ### 03_scan_wifi
@@ -117,19 +129,8 @@ Three conclusions can be drawn.
   
 When deploying a board, it may be necessary to test it multiple times in the position it will be used to find the proper TX power setting.
 
-
-**Working Example:**
+**Bluetooth connectivity sketches:**
 ---
-
-### 06_async_web_led
-
-Toggles the built-in LED on and off with a Web interface. It may be necessary to specify a valid Wi-Fi tx power as determined with the previous sketch. Edit `secrets.h.template` and save as `secrets.h` before compiling. 
-  
-Aside from setting the radio TX power and handling the fact that the built-in LED is active LOW, this project is the same as **05_async_web_led** in [xiao_esp32c3_sketches](https://github.com/sigmdel/xiao_esp32c3_sketches).
-
-This project cannot easily be compiled in the Arduino IDE:
-
-> The project uses the `esphome/ESPAsyncWebServer-esphome@^3.2.0` library which in turns depends on the `AsyncTCP` library. The latter depends on `IPv6Address.h` which is no longer included in the esp32 v3.0.1 core used in Arduino. So the `esphome` libraries cannot be copied to a private library directory for use in Arduino unless esp32 v2.0.17 were used (see [ptillisch](https://forum.arduino.cc/t/ide-2-3-2-ip46address-h-error/1272197/4)). If the older esp32 core were used, the `MakerGO ESP32 C3 SuperMini board` would not be defined. If we use v3.0.1, it seems that the `ESPAsyncWebServer` library loaded by the Arduino library manager which presumably does not require `IPv6Address.h` does not seem to support the ESP32-C3.  
 
 ### 07_ble_led
 
@@ -145,6 +146,19 @@ This project is similar to the previous one except for the use of the BLE librar
 
 Perhaps this test was done incorrectly. Any help on this subject would be appreciated.
 
+
+**Working example:**
+---
+
+### 0.6_async_web_led
+
+Toggles the built-in LED on and off with a Web interface. It may be necessary to specify a valid Wi-Fi tx power as determined with the previous sketch. Edit `secrets.h.template` and save as `secrets.h` before compiling. 
+  
+Aside from setting the radio TX power and handling the fact that the built-in LED is active LOW, this project is the same as **05_async_web_led** in [xiao_esp32c3_sketches](https://github.com/sigmdel/xiao_esp32c3_sketches).
+
+This project cannot easily be compiled in the Arduino IDE:
+
+> The project uses the `esphome/ESPAsyncWebServer-esphome@^3.2.0` library which in turns depends on the `AsyncTCP` library. The latter depends on `IPv6Address.h` which is no longer included in the esp32 v3.0.1 core used in Arduino. So the `esphome` libraries cannot be copied to a private library directory for use in Arduino unless esp32 v2.0.17 were used (see [ptillisch](https://forum.arduino.cc/t/ide-2-3-2-ip46address-h-error/1272197/4)). If the older esp32 core were used, the `MakerGO ESP32 C3 SuperMini board` would not be defined. If we use v3.0.1, it seems that the `ESPAsyncWebServer` library loaded by the Arduino library manager which presumably does not require `IPv6Address.h` does not seem to support the ESP32-C3.  
 
 ## 5. Licence
 
