@@ -139,6 +139,12 @@ The Super Mini C3 boards that were tested did not do well. Sometimes the connect
 
 This project is basically the same as **06_ble_led** in [xiao_esp32c3_sketches](https://github.com/sigmdel/xiao_esp32c3_sketches). Contrary what is stated in the documentation for that previous version, the project can be compiled in the Arduino IDE. It's definitely not properly set up for that. The `ble_led.ino` file has details on how to do it. 
 
+### 08_ble_led2
+
+This project is similar to the previous one except for the use of the BLE library instead of the ArduinoBLE library. The [BLE library](https://github.com/espressif/arduino-esp32/tree/master/libraries/BLE) included in the ESP32 core for Arduino was the creation of [Neil Kolban](https://github.com/nkolban/ESP32_BLE_Arduino). This makes it possible to set the BLE power level. Unlike setting Wi-Fi TX (transmit) power, setting the BLE power level did not result in obvious improvements in Bluetooth connectivity. Only BLE power type `ESP_BLE_PWR_TYPE_DEFAULT` with power levels  -21dbm, -15dbm, -9dbm, -3dbm, +3dbm + 9dbm, +15dbm and +21dbm, were tested. BLE power settings are more complex than Wi-Fi transmit power settings, so there may be something to gain in investigating this further. 
+
+Perhaps this test was done incorrectly. Any help on this subject would be appreciated.
+
 
 ## 5. Licence
 
