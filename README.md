@@ -21,7 +21,7 @@
 - [3. PlatformIO Notes](#3-platformio-notes)
 - [4. List of Projects](#4-list-of-projects)
 
-  **Hello world! sketeches:**
+  **Hello world! sketches:**
   - [01_pin_names](#01_pin_names)
   - [02_blink_pulse_led](#02_blink_pulse_led)
 
@@ -47,9 +47,7 @@ The Super Mini ESP32C3 boards are small simplified versions of the original Espr
 
 It seems that there is more than one manufacturer of these boards that differ in more or less subtle ways. The pin diagram above shows the markings on four boards purchased from a Chinese vendor in late April 2024. There are no labels identifying the red power LED to the left of the USB connector and the blue LED under the reset (RST) button. There are no other components near the single component between the ESP32-C3 chip and the red ceramic antenna labelled C3. Other boards and the [schematic](https://wiki.icbbuy.com/doku.php?id=developmentboard:esp32-c3mini#schematic) have other components which may explain the problems encountered with Wi-Fi connectivity. 
 
-It should **Wi-Fi Connectivity sketches:**
----
-be possible to compile the first five projects in the Arduino IDE and in PlatformIO, `async_web_led` does not compile in the Arduino IDE if version 3.0.1 of the `esp32` core is used.
+It should be possible to compile these projects in the Arduino IDE or in PlatformIO, although there are difficulties in a couple of cases if using the Arduino IDE.
 
 ## 2. Arduino IDE Notes
 
