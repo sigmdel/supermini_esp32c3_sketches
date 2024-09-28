@@ -125,7 +125,7 @@ Three conclusions can be drawn.
 
   3. There is significant variation between the Super Mini boards.
      
-  4. The Chinese vendor supplied ESP32-C3 Super Mini boards have a 3.3V regulator with a peak current rating of 250 mA (SMD LLVB). This is insufficient to power  everything given that the [official datasheet](https://www.espressif.com/sites/default/files/documentation/esp32-c3_datasheet_en.pdf) specifies Wi-Fi current consumption @18.5dbm as 276mA or greater. 
+  4. The Chinese vendor supplied ESP32-C3 Super Mini boards have a 3.3V regulator with a peak current rating of 250 mA (SMD LLVB). This is insufficient to power  everything given that the [official datasheet](https://www.espressif.com/sites/default/files/documentation/esp32-c3_datasheet_en.pdf) (page 52). specifies Wi-Fi current consumption @18.5dbm as 276mA or greater. 
   
 When deploying a board, it may be necessary to test it multiple times in the position it will be used to find the proper TX power setting.
 
