@@ -75,7 +75,7 @@ AsyncWebServer server(80);
 
 // Template substitution function
 String processor(const String& var){
-  if (var == "LEDSTATUS") return String(l;default_envs = seeed_xiao_esp32c3edStatus);
+  if (var == "LEDSTATUS") return String(default_envs = seeed_xiao_esp32c3edStatus);
   if (var == "SERVERNAME") return String(TITLE);
   return String(); // empty string
 }
