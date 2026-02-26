@@ -1,0 +1,12 @@
+{
+    "name": "MACs",
+    "description": "MAC address as String",
+    "keywords": "MAC address",
+    "repository": {
+        "type": "git",
+        "url": ""
+    },
+    "frameworks": "arduino",
+    "platforms": "espressif32",
+    "version": "0.0.1"
+}
