@@ -1,68 +1,74 @@
+/*
+ *  See ble_led2.ino for license and attribution.
+ */
 
+ #include <Arduino.h>
 #include <BLEDevice.h>
 #include <BLEUtils.h>
 #include <BLEServer.h>
 
+#include "MACs.h"
+
+//////// User configuration //////
+///
+///  Define if there is a 0.42" OLED on the board - not meaningful in this sketch
+///#define HAS_OLED
+///
+///  Define the io pin to which a LED is connected, default is the onboard user LED 
+#define LED_PIN LED_BUILTIN
+///
+///  What signal (HIGH or LOW) turns the LED on
+#define LED_ON LOW
+///
+//////////////////////////////////
+
+
+#if !defined(ESP32)
+  #error An ESP32 based board is required
+#endif  
+
+#if !ARDUINO_USB_CDC_ON_BOOT || ARDUINO_USB_CDC_ON_BOOT != 1
+  #error Expected an ESP32 board with on board USB peripheral
+#endif
+
+#if (ESP_ARDUINO_VERSION < ESP_ARDUINO_VERSION_VAL(3, 3, 7))    
+  #warning ESP32 Arduino core version 3.3.7 or newer is available
+#endif
+
+static uint8_t ledPin = LED_PIN;
+static uint8_t ledOn = LED_ON;
+
+void setLed(int value) {
+  digitalWrite(ledPin, (value) ? ledOn : 1-ledOn);
+  Serial.printf("LED now %s.\n", (digitalRead(ledPin) == ledOn) ? "on" : "off");
+}
+
 // This is a simplified example which can use custom UUIDs in which case
 // the client will probably show the UUID for the service and characteristic
-// or it can use some more or less valid reserved UUID from the Bluetooth(R) 
-// Assigned Numbers document https://www.bluetooth.com/specifications/assigned-numbers/ 
+// or it can use some more or less valid reserved UUID from the Bluetooth(R)
+// Assigned Numbers document https://www.bluetooth.com/specifications/assigned-numbers/
 //
-#define USE_CUSTOM_UUIDS
+//#define USE_CUSTOM_UUIDS
 
 #define BLUETOOTH_NAME  "BLE_LED2"
 
 #ifdef USE_CUSTOM_UUIDS
-  // Custom UUID for service and characteristic must not conflict with a reserved UUID 
+  // Custom UUID for service and characteristic must not conflict with a reserved UUID
   // that is no number in the XXXXXXXX-0000-1000-8000-00805F9B34FB range
   // Generated at https://www.guidgenerator.com/
   // https://novelbits.io/uuid-for-custom-services-and-characteristics/
   #define SERVICE_UUID        "57a81fc3-3c5f-4d29-80e7-8b074e34888c"
   #define CHARACTERISTIC_UUID "2eeae074-8955-47f7-9470-73f85112974f"
-#else 
+#else
   #define SERVICE_UUID        "1815" //"00001815-0000-1000-8000-00805F9B34FB"  // Automation IO Service
                             //"1812" //"00001812-0000-1000-8000-00805F9B34FB"  // Human Interface Device Service
                             //"181c" //"0000181c-0000-1000-8000-00805F9B34FB"  // User Data Service
   #define CHARACTERISTIC_UUID "2BE2" //"00002BE2-0000-1000-8000-00805F9B34FB"  // Light Output
-                            //"2BO5" //"00002B05-0000-1000-8000-00805F9B34FB"  // Power 
-#endif                          
-
-#if defined(BUILTIN_LED)
-  const uint8_t ledPin = BUILTIN_LED;
-  const uint8_t ledOn = LOW;
-#else
-  #error "ledPin not defined"
+                            //"2BO5" //"00002B05-0000-1000-8000-00805F9B34FB"  // Power
 #endif
 
-const char* ESP_PWR_LEVELS[] = {
-  "ESP_PWR_LVL_N24",   // 0,     -24dbm
-  "ESP_PWR_LVL_N21",   // 1,     -21dbm
-  "ESP_PWR_LVL_N18",   // 2,     -18dbm
-  "ESP_PWR_LVL_N15",   // 3,     -15dbm
-  "ESP_PWR_LVL_N12",   // 4,     -12dbm
-  "ESP_PWR_LVL_N9 ",   // 5,      -9dbm
-  "ESP_PWR_LVL_N6 ",   // 6,      -6dbm
-  "ESP_PWR_LVL_N3 ",   // 7,      -3dbm
-  "ESP_PWR_LVL_N0 ",   // 8,       0dbm
-  "ESP_PWR_LVL_P3 ",   // 9,      +3dbm
-  "ESP_PWR_LVL_P6 ",   // 10,     +6dbm
-  "ESP_PWR_LVL_P9 ",   // 11,     +9dbm
-  "ESP_PWR_LVL_P12",   // 12,     +12dbm
-  "ESP_PWR_LVL_P15",   // 13,     +15dbm
-  "ESP_PWR_LVL_P18",   // 14,     +18dbm
-  "ESP_PWR_LVL_P21"    // 15,     +21dbm
-};
-
-String PWR_LEVEL_STR(esp_power_level_t level) {
-  if ((level < ESP_PWR_LVL_N24) || (level > ESP_PWR_LVL_P21)) {
-    return String("ESP_PWR_LVL_INVALID");
-  } else {
-    return String(ESP_PWR_LEVELS[level]);  
-  }
-}  
-
 // leave undefined to use default BLE power level
-#define BLE_PWR_LEVEL  ESP_PWR_LVL_N21
+//#define BLE_PWR_LEVEL  ESP_PWR_LVL_N21
 
 BLEServer *pServer = nullptr;
 BLECharacteristic *pCharacteristic = nullptr;
@@ -79,61 +85,66 @@ class MyServerCallbacks: public BLEServerCallbacks {
       deviceConnected = false;
       Serial.println("Device disconnected");
       Serial.println("Restart advertising");
-      BLEDevice::startAdvertising(); 
+      BLEDevice::startAdvertising();
     }
 };
 
 class WriteCallbacks : public BLECharacteristicCallbacks {
   void onWrite(BLECharacteristic *pCharacteristic) {
     String value = pCharacteristic->getValue().c_str();
-    if (value == "on") {      
-      digitalWrite(ledPin, ledOn); 
-      Serial.println("Received \"on\" value");
+    if (value == "on") {
+      setLed(1);
     } else if(value == "off"){
-      digitalWrite(ledPin, 1-ledOn);
-      Serial.println("Received \"off\" value");
+      setLed(0);
     } else {
       Serial.printf("Received non valid \"%s\" value \n", value.c_str());
-    }  
+    }
   }
 };
 
 
 void setup() {
-  #if defined(ARDUINO_MAKERGO_C3_SUPERMINI)
-  Serial.begin();
-  delay(1000); // should be enough for the USB CDC to initialize
-  #else
-  Serial.begin(115200);
-  while (!Serial) delay(10);
+  #if !defined(SERIAL_BEGIN_DELAY)
+    #if defined(PLATFORMIO)
+      #define SERIAL_BEGIN_DELAY 5000    // 5 seconds
+    #else
+      #define SERIAL_BEGIN_DELAY 2000    // 2 seconds
+    #endif
+  #endif 
+
+  Serial.begin(); 
+  delay(SERIAL_BEGIN_DELAY);
+
+  Serial.println("\n\nProject: ble_led2");
+  Serial.println("Purpose: Toggle an external LED on and off with Bluetooth LE");
+  Serial.println("         setting the BLE power level if desired.");
+  Serial.print(  "  Board: ");
+  #ifdef ARDUINO_BOARD
+  Serial.print(ARDUINO_BOARD);
+  #else 
+  Serial.print("Unknown ESP32 board");
+  #endif
+  #ifdef HAS_OLED
+    Serial.print(" with 0.42\" OLED");
+  #endif  
+  Serial.printf("\n BT MAC: %s\n", BT_MAC_STR);
+  #if defined(ARDUINO_ESP32C3_DEV)
+    if (!String(ARDUINO_VARIANT).equals("nologo_esp32c3_super_mini")) {
+      Serial.println("Warning: Expected the Nologo ESP32C3 Super Mini board definition");
+  }
   #endif
 
-  Serial.println("Setup");
+  // begin initialization
 
-  Serial.println("Initializing LED");
+  Serial.println("\nInitializing LED");
   pinMode(ledPin, OUTPUT);
   digitalWrite(ledPin, 1-ledOn);
 
-  Serial.println("Initializing BLEDevice");
-  BLEDevice::init(BLUETOOTH_NAME);
-
-  // defined in <esp_bt.h> 
-  esp_power_level_t esp_ble_tx_power = esp_ble_tx_power_get(ESP_BLE_PWR_TYPE_DEFAULT);
-  Serial.print("Default BLE power level ");
-  Serial.println(PWR_LEVEL_STR(esp_ble_tx_power));
-
-  #if defined(BLE_PWR_LEVEL) 
-    // https://github.com/nkolban/esp32-snippets/issues/197#issuecomment-344115566
-    // http://esp-idf.readthedocs.io/en/latest/api-reference/bluetooth/controller_vhci.html?highlight=esp_ble_tx_power_set#_CPPv220esp_ble_tx_power_set20esp_ble_power_type_t17esp_power_level_t
-
-    BLEDevice::setPower(BLE_PWR_LEVEL);
-    delay(10);
-    esp_ble_tx_power = esp_ble_tx_power_get(ESP_BLE_PWR_TYPE_DEFAULT);
-    Serial.print("BLE power level set to ");
-    Serial.print(PWR_LEVEL_STR(esp_ble_tx_power));
-    Serial.print(" wanted ");
-    Serial.println(PWR_LEVEL_STR(BLE_PWR_LEVEL));
-  #endif
+  if (!BLEDevice::init(BLUETOOTH_NAME)) {
+    Serial.println("Could not start Bluetooth® Low Energy device!");
+    while (1);
+  }
+  Serial.println("Bluetooth® Low Energy (BLE) device started.");
 
   Serial.println("Creating a BLE server");
   pServer = BLEDevice::createServer();
@@ -146,6 +157,7 @@ void setup() {
   pCharacteristic = pService->createCharacteristic(
                       CHARACTERISTIC_UUID,
                       BLECharacteristic::PROPERTY_READ | BLECharacteristic::PROPERTY_WRITE);
+  pCharacteristic->setValue(String("off"));
   pCharacteristic->setCallbacks(new WriteCallbacks);
 
   Serial.println("Starting BLE service");
@@ -159,17 +171,22 @@ void setup() {
   Serial.println("Start BLE advertising");
   BLEDevice::startAdvertising();
 
-  Serial.print("\nSetup completed, connect to ");
-  Serial.println(BLUETOOTH_NAME);
-  Serial.print("Address: ");
-  Serial.println(BLEDevice::getAddress().toString().c_str());
+  Serial.printf("Device \"%s\" now being advertised", BLUETOOTH_NAME);
+  Serial.println("Connect to the device with a smartphone applications such as");
+  Serial.println("\n  nRF Connect for Mobile by Nordic Semiconductor ASA");
+  Serial.println("    Android: https://play.google.com/store/apps/details?id=no.nordicsemi.android.mcp");
+  Serial.println("    IOS: https://apps.apple.com/us/app/nrf-connect-for-mobile/id1054362403");
+  Serial.println("\n  LightBlue - Bluetooth LE by Punch Through Design");
+  Serial.println("    Android: https://play.google.com/store/apps/details?id=com.punchthrough.lightblueexplorer");
+  Serial.println("    IOS: https://apps.apple.com/us/app/lightblue/id557428110");
+  Serial.println("Turn the LED on or off by setting the characteristic to 'on' or 'off' in the application.");
 }
 
 unsigned long timer = 0;
 
 void loop() {
-  if (millis() - timer > 5000) {
+  if (millis() - timer > 10000) {
     Serial.println(" - loop busy work");
     timer = millis();
   }
-}  
+}

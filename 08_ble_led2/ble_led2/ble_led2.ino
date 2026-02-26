@@ -10,13 +10,13 @@
  *
  *  1- Add https://espressif.github.io/arduino-esp32/package_esp32_index.json
  *     in the Additional Boards Manager URLS in the Preferences window.
- *  2- Install platform esp32 by Espressif version 3.0.2 or newer with the Boards Manager
- *  3- Select the MakerGO ESP32 C3 SuperMini board
+ *  2- Install platform esp32 by Espressif version 3.3.7 or newer with the Boards Manager
+ *  3- Select the Nologo ESP32C3 Super Mini board
  *
  * Michel Deslierres
- * July 4, 2024
+ * February 26, 2026
  *
- * Copyright 2024, Michel Deslierres. No rights reserved, this code is in the public domain.
+ * Copyright 2024-2026, Michel Deslierres. No rights reserved, this code is in the public domain.
  * In those jurisdictions where this may be a problem, the BSD Zero Clause License applies.
  * <https://spdx.org/licenses/0BSD.html> */
  // SPDX-License-Identifier: 0BSD
