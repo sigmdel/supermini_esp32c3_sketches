@@ -8,11 +8,11 @@
 
 ---
 
-***February 26, 2026***
+***February 27, 2026***
 
-Sketches in this repository have been updated to use version 3.3.7 or better of the ESP32 Arduino core. 
+Sketches in this repository use version 3.3.7 or better of the ESP32 Arduino core. 
 
-A release and tag were created to easily recover the original 2024-10-14 release using version 3.0.1 of the core *as if that could be of interest*. 
+A release and tag were created to easily recover the original 2024-10-14 release with fewer sketches that used version 3.0.1 of the core *as if that could be of interest*. 
 
 ---
 
@@ -118,56 +118,44 @@ The projects can be grouped in categories.
 
 ### 5.1. Hello world! sketches:
 
-**00_sys_info**  
+- **00_sys_info** Displays information about the ESP32-C3 system on a chip.
 
-  Displays information about the ESP32-C3 system on a chip.
-
-**01_pin_names** 
-
-  Lists the I/O pin names and numbers of the Super Mini ESP32-C3 board along with some macro definitions.
-
+- **01_pin_names** Lists the I/O pin names and numbers of the Super Mini ESP32-C3 board along with some macro definitions.
 
 ### 5.2. Digital input and output sketches:
 
-**02_blink_pulse_led**
+- **02_blink_pulse_led** Alternately blinks (heartbeat) and pulses the on-board LED of the Super Mini board. The switch between these modes is done by pressing the boot button. Tests `digitalWrite()`, `analogWrite()`, and `digitalRead()`.
 
-  Alternately blinks (heartbeat) and pulses the on-board LED of the Super Mini board. The switch between these modes 
-  is done by pressing the boot button. Tests digitalWrite(), analogWrite(), and digitalRead().
+- **10_blink_leds** Toggles high and low each io pad along the edge of the Super Mini ESP32-C3 board in turn. Tests digitalWrite() and verifies the io pin mapping.
 
+- **11_pulse_leds** Ramps up and down the intensity of a LED connected to each io pad along the edges of the Super Mini ESP32-C3 in turn. Tests pulse width modulaton and `analogWrite()` and also verifies the io pin mapping.
 
 ### 5.3. Wi-Fi connectivity sketches:
 
-
-**03_scan_wifi**
-
-  Prints a list of available Wi-Fi networks every five seconds. Some Super Mini boards do not manage to find as many networks as others because of bad Wi-Fi performance. Edit `secrets.h.template` and save as `secrets.h` before compiling.
+- **03_scan_wifi** Prints a list of available Wi-Fi networks every five seconds. Some Super Mini boards do not manage to find as many networks as others because of bad Wi-Fi performance. Edit `secrets.h.template` and save as `secrets.h` before compiling.
   
-**04_wifi_connect**
+- **04_wifi_connect** Wi-Fi connection example. The Super Mini may very well fail to connect. Define the TRY_TX_POWER macro to see if that solves the problem. It may be necessary to change the value of the TX_POWER macro. Edit `secrets.h.template` and save as `secrets.h` before compiling.
 
-  Wi-Fi connection example. The Super Mini may very well fail to connect. Define the TRY_TX_POWER macro to see if that solves the problem. It may be necessary to change the value of the TX_POWER macro. Edit `secrets.h.template` and save as `secrets.h` before compiling.
-
-**05_wifi_tx_power**
-
-  Tests each predefined value for the Wi-Fi TX (transmit) power and records the time required to connect to the Wi-Fi network. Edit `secrets.h.template` and save as `secrets.h` before compiling.     
+- **05_wifi_tx_power** Tests each predefined value for the Wi-Fi TX (transmit) power and records the time required to connect to the Wi-Fi network. Edit `secrets.h.template` and save as `secrets.h` before compiling.     
 
   The table shows times needed to connect to a Wi-Fi network in milliseconds as a function of the radio TX power setting. The tests were run only once on a XIAO ESP32C3 and once on each of four different Super Mini boards. The `-` signifies that a connection was not made within two minutes. 
 
-|                           |  XIAO	|	SM 1 |	SM 2 | SM 3	|	SM 4 |
-| ---                       | :---: |	:---:| :---: | :---:|	:---:|
-|	      WIFI_POWER_default 	|	1143	|	-	|	-	|	- 	|	- 	|
-|	      WIFI_POWER_19_5dBm 	|	443	|	-	|	1230	|	- 	|	- 	|
-|	        WIFI_POWER_19dBm 	|	430	|	477	|	-	|	- 	|	-	|
-|	      WIFI_POWER_18_5dBm 	|	440	|	546	|	961	|	- 	|	- 	|
-|	        WIFI_POWER_17dBm 	|	391	|	443	|	389	|	532	|	- 	|
-|	        WIFI_POWER_15dBm 	|	404	|	410	|	425	|	422	|	- 	|
-|	        WIFI_POWER_13dBm 	|	376	|	729	|	684	|	469	|	1440	|
-|	        WIFI_POWER_11dBm 	|	429	|	423	|	399	|	409	|	484	|
-|	       WIFI_POWER_8_5dBm 	|	729	|	1929	|	414	|	425	|	443	|
-|	         WIFI_POWER_7dBm 	|	1923	|	718	|	413	|	430	|	399	|
-|	         WIFI_POWER_5dBm 	|	904	|	388	|	427	|	546	|	442	|
-|	         WIFI_POWER_2dBm 	|	678	|	507	|	390	|	937	|	408	|
+  |                           |  XIAO	|	SM 1 |	SM 2 | SM 3	|	SM 4 |
+  | ---                       | :---: |	:---:| :---: | :---:|	:---:|
+  |	      WIFI_POWER_default 	|	1143	|	-	|	-	|	- 	|	- 	|
+  |	      WIFI_POWER_19_5dBm 	|	443	|	-	|	1230	|	- 	|	- 	|
+  |	        WIFI_POWER_19dBm 	|	430	|	477	|	-	|	- 	|	-	|
+  |	      WIFI_POWER_18_5dBm 	|	440	|	546	|	961	|	- 	|	- 	|
+  |	        WIFI_POWER_17dBm 	|	391	|	443	|	389	|	532	|	- 	|
+  |	        WIFI_POWER_15dBm 	|	404	|	410	|	425	|	422	|	- 	|
+  |	        WIFI_POWER_13dBm 	|	376	|	729	|	684	|	469	|	1440	|
+  |	        WIFI_POWER_11dBm 	|	429	|	423	|	399	|	409	|	484	|
+  |	       WIFI_POWER_8_5dBm 	|	729	|	1929	|	414	|	425	|	443	|
+  |	         WIFI_POWER_7dBm 	|	1923	|	718	|	413	|	430	|	399	|
+  |	         WIFI_POWER_5dBm 	|	904	|	388	|	427	|	546	|	442	|
+  |	         WIFI_POWER_2dBm 	|	678	|	507	|	390	|	937	|	408	|
 
-**These results were obtained with the older version of the sketch**. The table contains the time required to connect to the Wi-Fi network and the time needed to acquire a valid IP address from the Wi-Fi router. The newer version of the sketch tabulates connection times only. The test will have to be redone.
+  **These results were obtained with the older version of the sketch**. The table contains the time required to connect to the Wi-Fi network and the time needed to acquire a valid IP address from the Wi-Fi router. The newer version of the sketch tabulates connection times only. The test will have to be redone.
 
 <!--
 Three conclusions can be drawn. 
@@ -183,21 +171,16 @@ When deploying a board, it may be necessary to test it multiple times in the pos
 
 ### 5.4. Bluetooth connectivity sketches:
 
-**07_ble_led**
+- **07_ble_led** A rudimentary example of the Bluetooth® Low Energy (BLE) capabilities of the ESP32-C3. The microcontroller is set up as a BLE peripheral with a LED service and as switch characteristic. Any central (client) device can turn the LED on or off by sending a proper message. [Bluetooth Controlled LED](https://sigmdel.ca/michel/ha/xiao/xiao_esp32c3_intro_en.html#ble) explains how to use **LightBlue**, an Android and presumably IOS application, to do that.
 
-A rudimentary example of the Bluetooth® Low Energy (BLE) capabilities of the ESP32-C3. The microcontroller is set up as a BLE peripheral with a LED service and as switch characteristic. Any central (client) device can turn the LED on or off by sending a proper message. [Bluetooth Controlled LED](https://sigmdel.ca/michel/ha/xiao/xiao_esp32c3_intro_en.html#ble) explains how to use **LightBlue**, an Android and presumably IOS application, to do that.
+  The project uses the [ArduinoBLE](https://github.com/arduino-libraries/ArduinoBLE) library from *arduino-libraries* which has very recently been updated. 
 
-The project uses the [ArduinoBLE](https://github.com/arduino-libraries/ArduinoBLE) library from *arduino-libraries* which has very recently been updated. 
-
-**Currently (2026-02-26) this project is not working. When using an ESP32-C3 based board it reboots after a core panic which occurs when the `BLE.begin()` is invoked.** More details are found at the top of the `main.cpp` file.
+  **Currently (2026-02-26) this project is not working. When using an ESP32-C3 based board it reboots after a core panic which occurs when the `BLE.begin()` is invoked.** More details are found at the top of the `main.cpp` file.
 
 <!--
 The Super Mini C3 boards that were tested did not do well. Sometimes the connection between the microcontroller and the Android tablet would require a considerable amount of time. At other times, the tablet had to be almost touching the microcontroller for the connection to be made. It happened that a connection could not be established at all even if **LightBlue** had found the Super Mini when it scanned for devices. By contrast, the XIAO-ESP32C3 was dependable.-->
 
-
-**08_ble_led2**
-
-This project is similar to the previous one except for the use of the BLE library instead of the ArduinoBLE library. The [BLE library](https://github.com/espressif/arduino-esp32/tree/master/libraries/BLE) included in the ESP32 core for Arduino was the creation of [Neil Kolban](https://github.com/nkolban/ESP32_BLE_Arduino). While in principle the BLE Tx power level could be modified in the hope of improving the performance of some Super Mini boards, problems have been encountered when setting the power level. Consequently, the project does not modify the default BT Tx power level.
+- **08_ble_led2** This project is similar to the previous one except for the use of the BLE library instead of the ArduinoBLE library. The [BLE library](https://github.com/espressif/arduino-esp32/tree/master/libraries/BLE) included in the ESP32 core for Arduino was the creation of [Neil Kolban](https://github.com/nkolban/ESP32_BLE_Arduino). While in principle the BLE Tx power level could be modified in the hope of improving the performance of some Super Mini boards, problems have been encountered when setting the power level. Consequently, the project does not modify the default BT Tx power level.
 
 
 <!--
@@ -210,21 +193,18 @@ Perhaps this test was done incorrectly. Any help on this subject would be apprec
 
 ### 5.5. Working example:
 
-**06_async_web_led**
-
-Toggles the built-in LED on and off with a Web interface. It may be necessary to specify a valid Wi-Fi tx power as determined with the previous sketch. Edit `secrets.h.template` and save as `secrets.h` before compiling. 
-  
-Aside from setting the radio TX power and handling the fact that the built-in LED is active LOW, this project is the same as **05_async_web_led** in [xiao_esp32c3_sketches](https://github.com/sigmdel/xiao_esp32c3_sketches).
+- **06_async_web_led** Toggles the built-in LED on and off with a Web interface. It may be necessary to specify a valid Wi-Fi tx power as determined with the previous sketch. Edit `secrets.h.template` and save as `secrets.h` before compiling. Aside from setting the radio TX power and handling the fact that the built-in LED is active LOW, this project is the same as **05_async_web_led** in [xiao_esp32c3_sketches](https://github.com/sigmdel/xiao_esp32c3_sketches).
 
  
 ## 6. Change Log
 
 | Date | Change |
 | :---  |  :--- |
+| 2026-07-27 | Add 10_blink_leds and 11_pulse_leds projects |
 | 2026-07-26 | Update to version 3.3.7 of the esp32 arduino core |
 | 2026-02-24 | Created a tag and release labelled v3.0.1_2024-10-14 |
 | 2024-10-14 | Merged pull requests from Beherith and billzajac | 
-| 2024-07-24 | Added 07_ble_led2 |
+| 2024-07-24 | Added 08_ble_led2 |
 | 2024-06-21 | Added 07_ble_led |
 | 2024-06-21 | Updated to v3.0.1 esp32 Arduino core|
 | 2024-05-12 | Initial version | 
