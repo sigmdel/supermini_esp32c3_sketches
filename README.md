@@ -8,7 +8,7 @@
 
 ---
 
-***February 27, 2026***
+***March 10, 2026***
 
 Sketches in this repository use version 3.3.7 or better of the ESP32 Arduino core. 
 
@@ -103,7 +103,7 @@ This was tested using the [pioarduinoIDE extension](https://marketplace.visualst
 
 ## 4. Caution
 
-There are more than one manufacturer of these boards that differ in more or less subtle ways. Some boards are very thin: 0.6 mm which makes them somewhat fragile. Others are more robust being almost twice as thick 1 mm. 
+There are more than one manufacturer of these boards that differ in more or less subtle ways. Some boards are very thin: 0.6 mm which makes them somewhat fragile. Others are more robust being 1 mm  thick. 
 
 A major problem with some Super Mini boards is their lack lustre to very bad Wi-Fi performance.
 
@@ -138,24 +138,31 @@ The projects can be grouped in categories.
 
 - **05_wifi_tx_power** Tests each predefined value for the Wi-Fi TX (transmit) power and records the time required to connect to the Wi-Fi network. Edit `secrets.h.template` and save as `secrets.h` before compiling.     
 
-  The table shows times needed to connect to a Wi-Fi network in milliseconds as a function of the radio TX power setting. The tests were run only once on a XIAO ESP32C3 and once on each of four different Super Mini boards. The `-` signifies that a connection was not made within two minutes. 
+The table shows times needed to connect to a Wi-Fi network in milliseconds as a function of the radio TX power setting for nine different ESP boards. The columns 5B:00, 46:88 and 2D:20 are three boards with no label purchased about 18 months ago. The next two column E5:C0 and EF:44 are ESP32C3 Super Mini boards from Tenstar. The sixth column; F5:40, is a Super Mini with OLED display. The last three boards are XIAO ESP32C6, ESP32C3 and ESP32C5 boards. The `-` signifies that a connection was not made within two minutes. 
 
-  |                           |  XIAO	|	SM 1 |	SM 2 | SM 3	|	SM 4 |
-  | ---                       | :---: |	:---:| :---: | :---:|	:---:|
-  |	      WIFI_POWER_default 	|	1143	|	-	|	-	|	- 	|	- 	|
-  |	      WIFI_POWER_19_5dBm 	|	443	|	-	|	1230	|	- 	|	- 	|
-  |	        WIFI_POWER_19dBm 	|	430	|	477	|	-	|	- 	|	-	|
-  |	      WIFI_POWER_18_5dBm 	|	440	|	546	|	961	|	- 	|	- 	|
-  |	        WIFI_POWER_17dBm 	|	391	|	443	|	389	|	532	|	- 	|
-  |	        WIFI_POWER_15dBm 	|	404	|	410	|	425	|	422	|	- 	|
-  |	        WIFI_POWER_13dBm 	|	376	|	729	|	684	|	469	|	1440	|
-  |	        WIFI_POWER_11dBm 	|	429	|	423	|	399	|	409	|	484	|
-  |	       WIFI_POWER_8_5dBm 	|	729	|	1929	|	414	|	425	|	443	|
-  |	         WIFI_POWER_7dBm 	|	1923	|	718	|	413	|	430	|	399	|
-  |	         WIFI_POWER_5dBm 	|	904	|	388	|	427	|	546	|	442	|
-  |	         WIFI_POWER_2dBm 	|	678	|	507	|	390	|	937	|	408	|
+|                  |5B:00 | 46:88 | 2D:20 |E5:C0 |EF:44 |F5:40| XC6 | XC3 | XC5 |
+|---               |:---:|:---: |:---: |:---:|:--: |:--:| :---:| :---: | :---: |
+| WIFI_POWER_20dBm | 1259 | 1251 | - | 49 | 86 | 51 | 49 | 1298 | 91 |
+| WIFI_POWER_19_5dBm | 1256 | 1250 | 1439 | 48 | 45 | 53 | 49 | 1251 | 50 |
+| WIFI_POWER_19dBm | 1253 | 1250 | 1260 | 45 | 44 | 48 | 92 | 1255 | 47 |
+| WIFI_POWER_18_5dBm | 1251 | 1254 | 1252 | 144 | 49 | 71 | 52 | 1256 | 48 |
+| WIFI_POWER_17dBm | 1250 | 1296 | 1251 | 47 | 45 | 45 | 48 | 1253 | 50 |
+| WIFI_POWER_15dBm | 1250 | 1260 | 1254 | 46 | 48 | 46 | 48 | 1254 | 47 |
+| WIFI_POWER_13dBm | 1250 | 1253 | 1252 | 45 | 46 | 49 | 51 | 1251 | 47 |
+| WIFI_POWER_11dBm | 1323 | 1253 | 1253 | 46 | 46 | 57 | 53 | 1252 | 50 |
+| WIFI_POWER_8_5dBm | 1294 | 1264 | 1301 | 50 | 85 | 53 | 128 | 1255 | 48 |
+| WIFI_POWER_7dBm | 1300 | 1267 | 1312 | 48 | 87 | - | - | 1253 | 47 |
+| WIFI_POWER_5dBm | 1265 | - | 1258 | 1157 | 52 | - | - | 1251 | 49 |
+| WIFI_POWER_2dBm | - | - | 1360 | - | 59 | - | - | 1254 | 48 |
 
-  **These results were obtained with the older version of the sketch**. The table contains the time required to connect to the Wi-Fi network and the time needed to acquire a valid IP address from the Wi-Fi router. The newer version of the sketch tabulates connection times only. The test will have to be redone.
+The long connect times for the XIAO ESP32C3 are surprising because it systematically connects in under 50 ms when the TX power is never changed from the default 20 dBm setting. Two reasons have been put forward for the long connection times for some Super Mini boards. 
+
+  - Some Super Mini boards have a 3.3V regulator with a peak current rating of 250 mA (SMD LLVB). This is insufficient to power everything given that the [official datasheet](https://www.espressif.com/sites/default/files/documentation/esp32-c3_datasheet_en.pdf) specifies Wi-Fi current consumption @18.5dbm as 276mA or greater. 
+  [Beherith](https://github.com/sigmdel/supermini_esp32c3_sketches/pull/1).
+
+  - Bad design such as having the ceramic antenna too close to other components on the board or the presence of an impedance mismatch with the ceramic antenna.
+
+More details can be found in the section [6.4 Source of the Wi-Fi Problem](https://sigmdel.ca/michel/ha/esp8266/super_mini_esp32c3_en.html#antenna).
 
 <!--
 Three conclusions can be drawn. 
@@ -190,7 +197,6 @@ Perhaps this test was done incorrectly. Any help on this subject would be apprec
 -->
 
 
-
 ### 5.5. Working example:
 
 - **06_async_web_led** Toggles the built-in LED on and off with a Web interface. It may be necessary to specify a valid Wi-Fi tx power as determined with the previous sketch. Edit `secrets.h.template` and save as `secrets.h` before compiling. Aside from setting the radio TX power and handling the fact that the built-in LED is active LOW, this project is the same as **05_async_web_led** in [xiao_esp32c3_sketches](https://github.com/sigmdel/xiao_esp32c3_sketches).
@@ -200,8 +206,9 @@ Perhaps this test was done incorrectly. Any help on this subject would be apprec
 
 | Date | Change |
 | :---  |  :--- |
-| 2026-07-27 | Add 10_blink_leds and 11_pulse_leds projects |
-| 2026-07-26 | Update to version 3.3.7 of the esp32 arduino core |
+| 2026-03-10 | Improved wifi_tx_power sketch and more boards tested |
+| 2026-02-27 | Add 10_blink_leds and 11_pulse_leds projects |
+| 2026-02-26 | Update to version 3.3.7 of the esp32 arduino core |
 | 2026-02-24 | Created a tag and release labelled v3.0.1_2024-10-14 |
 | 2024-10-14 | Merged pull requests from Beherith and billzajac | 
 | 2024-07-24 | Added 08_ble_led2 |
