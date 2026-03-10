@@ -4,13 +4,13 @@
 
 #include <Arduino.h>
 
-#if (ESP_ARDUINO_VERSION < ESP_ARDUINO_VERSION_VAL(3, 3, 7))    
-  #warning ESP32 Arduino core version 3.3.7 or newer is available
-#endif 
-
 #if !defined(ESP32)
   #error An ESP32 based board is required
 #endif  
+
+#if (ESP_ARDUINO_VERSION < ESP_ARDUINO_VERSION_VAL(3, 3, 7))    
+  #warning ESP32 Arduino core version 3.3.7 or newer is available
+#endif 
 
 #if !ARDUINO_USB_CDC_ON_BOOT || ARDUINO_USB_CDC_ON_BOOT != 1
   #error Expected an ESP32 board with on board USB peripheral
