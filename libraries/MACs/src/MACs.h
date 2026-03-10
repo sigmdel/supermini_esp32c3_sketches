@@ -29,7 +29,7 @@ extern String getDefaultMacAddress();
 // If 'interface' is ESP_MAC_IEEE802154 or ESP_MAC_EFUSE_EXT and the ESP32 does
 // not supports IEEE 802.15.4, the returned string will be empty.
 //
-// If 'interfaceq' is ESP_MAC_EFUSE_CUSTOM and a custom MAC has not been burned
+// If 'interface' is ESP_MAC_EFUSE_CUSTOM and a custom MAC has not been burned
 // in the ESP32 eFuse, the returned string will be empty and an error message
 // will be posted. No means was found to avoid this.
 
