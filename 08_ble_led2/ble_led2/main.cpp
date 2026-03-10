@@ -171,7 +171,7 @@ void setup() {
   Serial.println("Start BLE advertising");
   BLEDevice::startAdvertising();
 
-  Serial.printf("Device \"%s\" now being advertised", BLUETOOTH_NAME);
+  Serial.printf("Device \"%s\" now being advertised\n", BLUETOOTH_NAME);
   Serial.println("Connect to the device with a smartphone applications such as");
   Serial.println("\n  nRF Connect for Mobile by Nordic Semiconductor ASA");
   Serial.println("    Android: https://play.google.com/store/apps/details?id=no.nordicsemi.android.mcp");
