@@ -79,7 +79,8 @@ void start_connecting(void) {
         delay(25);
       }
     }
-    Serial.printf("Wi-Fi TX power set to: %d\n", WiFi.getTxPower());
+    int txpower = WiFi.getTxPower();
+    Serial.printf("Wi-Fi TX power set to: %d = %.1f dBm\n", txpower, txpower*0.25);
   #endif
   connect_time = millis();
   dottime = millis();
