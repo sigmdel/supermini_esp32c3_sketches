@@ -25,8 +25,10 @@ void iopins(void) {
   Serial.printf(" A2 = %d [JTAG MTDI]\n", A2);
   Serial.printf(" A3 = %d [JTAG MTCK]\n", A3);
   Serial.printf(" A4 = %d [JTAG MTDO]\n", A4);
-  Serial.printf(" A5 = %d\n", A5);
-
+  Serial.printf(" A5 = %d *\n", A5);
+  Serial.println("  (*) \"The Digital Controller of SAR ADC2 cannot work.. It is suggested to use SAR ADC1.\"");
+  Serial.println("      Source: ESP32-C3 Series SoC Errata v1.1. A5 is connected to ADC2.");
+  
   Serial.println("\nThe I/O number of the 13 digital pins");
   for (int i=0; i<11; i++) {
     Serial.printf(" %2d\n", i);
@@ -127,12 +129,17 @@ void iopins(void) {
     #error  ARDUINO_VARIANT should be defined
   #endif
 
+  #ifdef ARDUINO_NOLOGO_ESP32C3_SUPER_MINI
+  Serial.println("  ARDUINO_NOLOGO_ESP32C3_SUPER_MINI");
+  #else
+  Serial.println("  ARDUINO_NOLOGO_ESP32C3_SUPER_MINI not defined");
+  #endif 
+
   #ifdef ARDUINO_ESP32C3_DEV
   Serial.println("  ARDUINO_ESP32C3_DEV");
   #else
   Serial.println("  ARDUINO_ESP32C3_DEV is not defined");
   #endif
-
 
   #ifdef ARDUINO_USB_CDC_ON_BOOT 
   Serial.printf("  ARDUINO_USB_CDC_ON_BOOT = %d\n", ARDUINO_USB_CDC_ON_BOOT);
