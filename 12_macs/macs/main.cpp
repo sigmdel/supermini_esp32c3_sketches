@@ -9,7 +9,7 @@
 //////// User configuration //////
 ///
 ///  Define if a custom MAC address was burned in ESP32 fuse memory
-#define HAS_CUSTOM_MAC
+///#define HAS_CUSTOM_MAC
 ///
 ///
 ///  Rate of USB to Serial chip if used on the development board.
@@ -86,7 +86,6 @@ void setup() {
       #define SERIAL_BEGIN_DELAY 2000    // 2 seconds
     #endif
   #endif 
-
   delay(SERIAL_BEGIN_DELAY);
 
   Serial.println("\n\nProject: Print MACs");
@@ -96,7 +95,7 @@ void setup() {
   #else 
   Serial.println("Unknown ESP32 board");
   #endif
-  Serial.println("Purpose: Print out the MAC addresses of all interfaces");
+  Serial.println("Purpose: Display the MAC addresses of all interfaces");
 }
 
 void loop() {
