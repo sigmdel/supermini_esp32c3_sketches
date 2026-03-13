@@ -8,7 +8,7 @@
 
 ---
 
-***March 10, 2026***
+***March 13, 2026***
 
 Sketches in this repository use version 3.3.7 or better of the ESP32 Arduino core. 
 
@@ -122,6 +122,8 @@ The projects can be grouped in categories.
 
 - **01_pin_names** Lists the I/O pin names and numbers of the Super Mini ESP32-C3 board along with some macro definitions.
 
+- **12_macs** Lists all the MAC addresses of the ESP32-C3 interfaces.
+
 ### 5.2. Digital input and output sketches:
 
 - **02_blink_pulse_led** Alternately blinks (heartbeat) and pulses the on-board LED of the Super Mini board. The switch between these modes is done by pressing the boot button. Tests `digitalWrite()`, `analogWrite()`, and `digitalRead()`.
@@ -129,6 +131,8 @@ The projects can be grouped in categories.
 - **10_blink_leds** Toggles high and low each io pad along the edge of the Super Mini ESP32-C3 board in turn. Tests digitalWrite() and verifies the io pin mapping.
 
 - **11_pulse_leds** Ramps up and down the intensity of a LED connected to each io pad along the edges of the Super Mini ESP32-C3 in turn. Tests pulse width modulaton and `analogWrite()` and also verifies the io pin mapping.
+
+- **13_poll** Tests polling of all the i/o pins of the Super Mini ESP32-C3 when the pins are in INPUT and OUTPUT modes.
 
 ### 5.3. Wi-Fi connectivity sketches:
 
@@ -206,6 +210,8 @@ Perhaps this test was done incorrectly. Any help on this subject would be apprec
 
 | Date | Change |
 | :---  |  :--- |
+| 2026-03-13 | Add 13_poll project, update the blog and update this README |
+| 2026-03-11 | Add 12_macs project |
 | 2026-03-10 | Improved wifi_tx_power sketch and more boards tested |
 | 2026-02-27 | Add 10_blink_leds and 11_pulse_leds projects |
 | 2026-02-26 | Update to version 3.3.7 of the esp32 arduino core |
