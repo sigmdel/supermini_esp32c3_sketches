@@ -7,7 +7,7 @@
 //////// User configuration //////
 ///
 ///  Define if there is a 0.42" OLED on the board
-#define HAS_OLED
+///#define HAS_OLED
 ///
 ///  Rate of USB to Serial chip if used on the development board.
 ///  This is ignored when the native USB peripheral of the 
@@ -181,14 +181,6 @@ void loop() {
     Serial.printf(" (gpio %d) has been raised %lu times\n", button.PIN, button.numberKeyPresses);
     button.pressed = false;
     button.numberKeyPresses = 0;
-    /*
-    // debouncing sort of. Can't use delay() if
-    // interrupts are disabled.
-    noInterrupts();  // not a good idea
-    timer = millis();
-    while (millis() - timer < 100) {  };   // do nothing
-    interrupts();
-    */
   }
   if (boot_button_pressed) {
     nextIndex();
