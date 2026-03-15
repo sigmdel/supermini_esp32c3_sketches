@@ -1,6 +1,6 @@
 /*
  * poll.ino
- * Test polling of all the i/o pins of the Super Mini ESP32-C3.
+ * Test polling of all the i/o pins of the ESP32-C3 Super Mini.
  *
  * Starts with pin D0 and goes around the board counterclockwise.
  *
