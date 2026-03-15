@@ -1,5 +1,5 @@
 /*
- *  See interrupt.ino for license and attribution.
+ *  See interrupts.ino for license and attribution.
  */
 
 #include <Arduino.h>
@@ -141,7 +141,7 @@ void setup() {
   #endif 
   delay(SERIAL_BEGIN_DELAY);
 
-  Serial.println("\n\nProject: poll");
+  Serial.println("\n\nProject: interrupt");
   Serial.println("Purpose: Check the interrupt capabilities of the GPIO pins of the Super Mini");
   Serial.print(  "  Board: ");
   #ifdef ARDUINO_BOARD

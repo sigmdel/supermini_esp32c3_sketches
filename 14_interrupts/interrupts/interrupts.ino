@@ -1,6 +1,6 @@
 /*
- * interrupt.ino
- * Test the interrupt capability of all the i/o pins of the XIAO ESP32C5.
+ * interrupts.ino
+ * Test the interrupt capability of all the i/o pins of the ESP32-C3 Super Mini.
  *
  * Starts with pin D0 and goes around the board counterclockwise.
  * The builtin in user LED is also blinked.
@@ -12,11 +12,11 @@
  *
  *  1- Add https://espressif.github.io/arduino-esp32/package_esp32_index.json
  *     in the Additional Boards Manager URLS in the Preferences window.
- *  2- Install platform esp32 by Espressif version 3.0.1 or newer with the Boards Manager
- *  3- Select the XIAO_ESP32C5 board
+ *  2- Install platform esp32 by Espressif version 3.3.7 or newer with the Boards Manager
+ *  3- Select the Nologo ESP32C3 Super Mini board
  *
  * Michel Deslierres
- * Jan 13, 2026
+ * March 14, 2026
  *
  * Copyright 2026, Michel Deslierres. No rights reserved, this code is in the public domain.
  * In those jurisdictions where this may be a problem, the BSD Zero Clause License applies.
