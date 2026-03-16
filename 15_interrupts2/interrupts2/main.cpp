@@ -9,17 +9,27 @@
 ///  Define if there is a 0.42" OLED on the board
 ///#define HAS_OLED
 ///
-///  Define this macro to see the user LED flash for 25 ms
-///  whenever a button ISR is executed
-///#define FLASH_IN_ISR
+///  Define the default debounce time of each switch
+///  connected to an i/o pin (in milliseconds)
+#define DEBOUNCE_TIME 200
 ///
-///  Define this macro to handle button release bounce
+///  Define this macro to reset the button pressed
+///  timer each time the interrupt routine is invoked,
+///  in other words, on each switch bounce 
+///#define RESET_TIMER
+///
+///  Define this macro in attempt to handle button release bounce
 ///  will make interrupt type LOW ineffective
 ///#define EXTRA_TEST
 ///
 ///  Define this macro to print a seconds time stamp (with 
-///  millisecond precision) at the start of each button event  
+///  millisecond precision) at the start of statements to the
+///  serial monitor about button events  
 ///#define TIME_STAMP
+///
+///  Define this macro to see the user LED flash for 25 ms
+///  whenever a button ISR is executed
+///#define FLASH_IN_ISR
 ///
 ///  Rate of USB to Serial chip if used on the development board.
 ///  This is ignored when the native USB peripheral of the 
@@ -88,8 +98,11 @@ Button buttons[padcount];
 
 void ARDUINO_ISR_ATTR button_isr(void *arg) { 
   Button *btn = static_cast<Button *>(arg);
+  #ifndef RESET_TIMER
+  if (!btn->pressed) 
+  #endif
+    btn->actTime = millis();
   btn->pressed = true;
-  btn->actTime = millis();
   btn->counter++;
   #ifdef FLASH_IN_ISR
     digitalWrite(LED_BUILTIN, LOW);
@@ -152,7 +165,7 @@ void setup() {
         Serial.printf(" %s", padlabels[ndx]);
         mode = RISING;
       } else if (ndx > 4) {
-        if (ndx == 5) Serial.print("\nPins with LOW interrupt mode:");
+        if (ndx == 5) Serial.print("\nPins with ONLOW interrupt mode:");
         Serial.printf(" %s", padlabels[ndx]);
         mode = ONLOW;  
       } else {
@@ -162,7 +175,7 @@ void setup() {
       }
         pinMode(iopins[ndx], INPUT_PULLUP);
         buttons[ndx].pinIndex = ndx;
-        buttons[ndx].debounceTime = 200; // 100 ms debounce time
+        buttons[ndx].debounceTime = DEBOUNCE_TIME;
         buttons[ndx].pressed = false;
         attachInterruptArg(iopins[ndx], button_isr, &buttons[ndx], mode); 
     #ifdef FLASH_IN_ISR 
