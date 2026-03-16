@@ -4,15 +4,15 @@
 
 ---
 
-**Code source qui accompagne [Coup d'oeil sur la carte de développement Super Mini ESP32-C3](https://sigmdel.ca/michel/ha/esp8266/super_mini_esp32c3_en.html).**
+**Code source qui accompagne [Coup d'oeil sur la carte de développement Super Mini ESP32-C3](https://sigmdel.ca/michel/ha/esp8266/super_mini_esp32c3_en.html).** Ce billet correspond à la version originale du référentiel datant du 14 octobre 2024. La version en anglais est à jour.
 
 ---
 
-***March 13, 2026***
+***March 16, 2026***
 
 Sketches in this repository use version 3.3.7 or better of the ESP32 Arduino core. 
 
-A release and tag were created to easily recover the original 2024-10-14 release with fewer sketches that used version 3.0.1 of the core *as if that could be of interest*. 
+A release and tag were created to easily recover the original 2024-10-14 release with fewer sketches that used version 3.0.1 of the core *as if that could be of interest*. The original version of the First Look post is available [here](http://localhost/michel/ha/esp8266/super_mini_esp32c3_org_en.html).
 
 ---
 
@@ -31,7 +31,7 @@ A release and tag were created to easily recover the original 2024-10-14 release
   - [5.1. Hello world! sketches:](#51-hello-world-sketches)
   - [5.2. Digital input and output sketches:](#52-digital-input-and-output-sketches)
   - [5.3. Wi-Fi connectivity sketches:](#53-wi-fi-connectivity-sketches)
-  - [5.4. Bluetooth connectivity sketches:**](#54-bluetooth-connectivity-sketches)
+  - [5.4. Bluetooth connectivity sketches:](#54-bluetooth-connectivity-sketches)
   - [5.5. Working example:](#55-working-example)
 - [6. Change Log](#6-change-log)
 - [7. Licence](#7-licence)
@@ -134,6 +134,10 @@ The projects can be grouped in categories.
 
 - **13_poll** Tests polling of all the i/o pins of the Super Mini ESP32-C3 when the pins are in INPUT and OUTPUT modes.
 
+- **14_interrupts** Test the interrupt capability of all the i/o pins of the Super Mini ESP32-C3.
+
+- **15_interrupts2** Investigates	three interrupt modes and debouncing techniques with an Super Mini ESP32-C3.
+
 ### 5.3. Wi-Fi connectivity sketches:
 
 - **03_scan_wifi** Prints a list of available Wi-Fi networks every five seconds. Some Super Mini boards do not manage to find as many networks as others because of bad Wi-Fi performance. Edit `secrets.h.template` and save as `secrets.h` before compiling.
@@ -210,6 +214,9 @@ Perhaps this test was done incorrectly. Any help on this subject would be apprec
 
 | Date | Change |
 | :---  |  :--- |
+| 2026-03-16 | Add options to the interrupts2.ino and update this README |
+| 2026-03-15 | Add 15_interrupts2 project |
+| 2026-03-14 | Add 14_interrupts project |
 | 2026-03-13 | Add 13_poll project, update the blog and update this README |
 | 2026-03-11 | Add 12_macs project |
 | 2026-03-10 | Improved wifi_tx_power sketch and more boards tested |
