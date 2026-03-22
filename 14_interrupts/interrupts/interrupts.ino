@@ -2,8 +2,6 @@
  * interrupts.ino
  * Test the interrupt capability of all the i/o pins of the ESP32-C3 Super Mini.
  *
- * Starts with pin D0 and goes around the board counterclockwise.
- * The builtin in user LED is also blinked.
  *
  * This is a stub to satisfy the Arduino IDE, the source code is in
  * the main.cpp file in the same directory.
