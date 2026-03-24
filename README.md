@@ -30,9 +30,11 @@ A release and tag were created to easily recover the original 2024-10-14 release
 - [5. List of Projects](#5-list-of-projects)
   - [5.1. Hello world! sketches:](#51-hello-world-sketches)
   - [5.2. Digital input and output sketches:](#52-digital-input-and-output-sketches)
-  - [5.3. Wi-Fi connectivity sketches:](#53-wi-fi-connectivity-sketches)
-  - [5.4. Bluetooth connectivity sketches:](#54-bluetooth-connectivity-sketches)
-  - [5.5. Working example:](#55-working-example)
+  - [5.3. Analogue Input sketches:](#53-analogue-input-sketches)
+  - [5.4. Deep Sleep Mode sketches:](#54-deep-sleep-mode-sketches)
+  - [5.5. Wi-Fi connectivity sketches:](#55-wi-fi-connectivity-sketches)
+  - [5.6. Bluetooth connectivity sketches:](#56-bluetooth-connectivity-sketches)
+  - [5.7. Working example:](#57-working-example)
 - [6. Change Log](#6-change-log)
 - [7. Licence](#7-licence)
 
@@ -138,19 +140,19 @@ The projects can be grouped in categories.
 
 - **15_interrupts2** Investigates	three interrupt modes and debouncing techniques with an Super Mini ESP32-C3.
 
-### Analogue Input sketches:
+### 5.3. Analogue Input sketches:
 
 - **16_adc** Testing all the analogue input pins of the Super Mini ESP32-C3.
 
 - **17_adcc**	Testing continuous analogue input of the Super Mini ESP32-C3.
 
-### Deep Sleep Mode sketches:
+### 5.4. Deep Sleep Mode sketches:
 
 - **18_deep_sleep_tmr**	Wake a Super Mini ESP32-C3 from deep sleep mode with timer.
 
 - **19_deep_sleep_io**	Wake a Super Mini ESP32-C3 from deep sleep mode with a high or low signal to an i/o pin.
 
-### 5.3. Wi-Fi connectivity sketches:
+### 5.5. Wi-Fi connectivity sketches:
 
 - **03_scan_wifi** Prints a list of available Wi-Fi networks every five seconds. Some Super Mini boards do not manage to find as many networks as others because of bad Wi-Fi performance. Edit `secrets.h.template` and save as `secrets.h` before compiling.
   
@@ -196,7 +198,7 @@ Three conclusions can be drawn.
 When deploying a board, it may be necessary to test it multiple times in the position it will be used to find the proper TX power setting.
 -->
 
-### 5.4. Bluetooth connectivity sketches:
+### 5.6. Bluetooth connectivity sketches:
 
 - **07_ble_led** A rudimentary example of the Bluetooth® Low Energy (BLE) capabilities of the ESP32-C3. The microcontroller is set up as a BLE peripheral with a LED service and as switch characteristic. Any central (client) device can turn the LED on or off by sending a proper message. [Bluetooth Controlled LED](https://sigmdel.ca/michel/ha/xiao/xiao_esp32c3_intro_en.html#ble) explains how to use **LightBlue**, an Android and presumably IOS application, to do that.
 
@@ -217,7 +219,7 @@ Perhaps this test was done incorrectly. Any help on this subject would be apprec
 -->
 
 
-### 5.5. Working example:
+### 5.7. Working example:
 
 - **06_async_web_led** Toggles the built-in LED on and off with a Web interface. It may be necessary to specify a valid Wi-Fi tx power as determined with the previous sketch. Edit `secrets.h.template` and save as `secrets.h` before compiling. Aside from setting the radio TX power and handling the fact that the built-in LED is active LOW, this project is the same as **05_async_web_led** in [xiao_esp32c3_sketches](https://github.com/sigmdel/xiao_esp32c3_sketches).
 
