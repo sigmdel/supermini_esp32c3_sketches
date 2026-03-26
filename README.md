@@ -31,8 +31,8 @@ A release and tag were created to easily recover the original 2024-10-14 release
   - [5.1. Hello world! sketches:](#51-hello-world-sketches)
   - [5.2. Digital input and output sketches:](#52-digital-input-and-output-sketches)
   - [5.3. Analogue input sketches:](#53-analogue-input-sketches)
-  - [5.4. Serial communication sketches:](#54-serial-communication-sketches)
-  - [5.5. Deep sleep mode sketches:](#55-deep-sleep-mode-sketches)
+  - [5.4. Deep sleep mode sketches:](#54-deep-sleep-mode-sketches)
+  - [5.5. Serial communication sketches:](#55-serial-communication-sketches)
   - [5.6. Wi-Fi connectivity sketches:](#56-wi-fi-connectivity-sketches)
   - [5.7. Bluetooth connectivity sketches:](#57-bluetooth-connectivity-sketches)
   - [5.8. Working example:](#58-working-example)
@@ -147,17 +147,17 @@ The projects can be grouped in categories.
 
 - **17_adcc**	Testing continuous analogue input of the Super Mini ESP32-C3.
 
-### 5.4. Serial communication sketches:
-
-- **20_uart** Test the UART0 peripheral of the ESP32-C3 with a loop back test.
-
-- **21_uart2** Test the UAR0 and UART1 peripherals of the ESP32-C3 with loop back tests.
-
-### 5.5. Deep sleep mode sketches:
+### 5.4. Deep sleep mode sketches:
 
 - **18_deep_sleep_tmr**	Wake a Super Mini ESP32-C3 from deep sleep mode with timer.
 
 - **19_deep_sleep_io**	Wake a Super Mini ESP32-C3 from deep sleep mode with a high or low signal to an i/o pin.
+
+### 5.5. Serial communication sketches:
+
+- **20_uart** Test the UART0 peripheral of the ESP32-C3 with a loop back test.
+
+- **21_uart2** Test the UAR0 and UART1 peripherals of the ESP32-C3 with loop back tests.
 
 ### 5.6. Wi-Fi connectivity sketches:
 
