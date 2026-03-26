@@ -8,7 +8,7 @@
 
 ---
 
-***March 24, 2026***
+***March 26, 2026***
 
 Sketches in this repository use version 3.3.7 or better of the ESP32 Arduino core. 
 
@@ -140,13 +140,19 @@ The projects can be grouped in categories.
 
 - **15_interrupts2** Investigates	three interrupt modes and debouncing techniques with an Super Mini ESP32-C3.
 
-### 5.3. Analogue Input sketches:
+### 5.3. Analogue input sketches:
 
 - **16_adc** Testing all the analogue input pins of the Super Mini ESP32-C3.
 
 - **17_adcc**	Testing continuous analogue input of the Super Mini ESP32-C3.
 
-### 5.4. Deep Sleep Mode sketches:
+### Serial communication sketches:
+
+- **20_uart** Test the UART0 peripheral of the ESP32-C3 with a loop back test.
+
+- **21_uart2** Test the UAR0 and UART1 peripherals of the ESP32-C3 with loop back tests.
+
+### 5.4. Deep sleep mode sketches:
 
 - **18_deep_sleep_tmr**	Wake a Super Mini ESP32-C3 from deep sleep mode with timer.
 
@@ -228,6 +234,7 @@ Perhaps this test was done incorrectly. Any help on this subject would be apprec
 
 | Date | Change |
 | :---  |  :--- |
+| 2026-03-26 | Add 20_uart and 21_uart2 projects and update this README |
 | 2026-03-24 | Add 18_deep_sleep_tmr and 19_deep_sleep_io projects and update this README |
 | 2026-03-22 | Add 16_adc and 17_adcc projects |
 | 2026-03-16 | Add options to the interrupts2.ino and update this README |
