@@ -23,8 +23,9 @@
 ///
 //////////////////////////////////
 
-#if !defined(ESP32)
-  #error An ESP32 based board is required
+
+#if !defined(CONFIG_IDF_TARGET_ESP32C3)
+  #error An ESP32-C3 SoC is required
 #endif  
 
 #if !ARDUINO_USB_CDC_ON_BOOT || ARDUINO_USB_CDC_ON_BOOT != 1
@@ -168,7 +169,7 @@ void setup() {
   #ifdef ARDUINO_BOARD
   Serial.print(ARDUINO_BOARD);
   #else 
-  Serial.print("Unknown ESP32 board");
+  Serial.print("Unknown ESP32-C3 based board");
   #endif
   #ifdef HAS_OLED
     Serial.print(" with 0.42\" OLED");
