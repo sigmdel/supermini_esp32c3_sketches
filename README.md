@@ -108,7 +108,7 @@ This was tested using the [pioarduinoIDE extension](https://marketplace.visualst
 
 There are more than one manufacturer of these boards that differ in more or less subtle ways. Some boards are very thin: 0.6 mm which makes them somewhat fragile. Others are more robust being 1 mm  thick. 
 
-A major problem with some Super Mini boards is their lack lustre to very bad Wi-Fi and Bluetooth performance.
+A major problem with some Super Mini boards is their lack lustre to very bad Wi-Fi and Bluetooth performance. However all Super Mini boards are not the same, and some have reasonable wireless performance. Unfortunately, it is not always obvious in which category the boards offered by a particular vendor fall. 
 
 <!--
 The pin diagram above shows the markings on four boards purchased from a Chinese vendor in late April 2024. There are no labels identifying the red power LED to the left of the USB connector and the blue LED under the reset (RST) button. There are no other components near the single component between the ESP32-C3 chip and the red ceramic antenna labelled C3. Other boards and the [schematic](https://wiki.icbbuy.com/doku.php?id=developmentboard:esp32-c3mini#schematic) have other components which may explain the problems encountered with Wi-Fi connectivity. 
