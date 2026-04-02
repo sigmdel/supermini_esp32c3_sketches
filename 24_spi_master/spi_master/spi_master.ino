@@ -1,6 +1,6 @@
 /*
  * spi.ino
- * SPI loopback test
+ * Test of SPI communication; SPI master device firmware
  *
  * This is a stub to satisfy the Arduino IDE, the source code is in
  * the main.cpp file in the same directory.

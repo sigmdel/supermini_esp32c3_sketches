@@ -1,6 +1,6 @@
 /*
  * spi.ino
- * SPI loopback test
+ * SPI loopback tests with 12 different pin assignements
  *
  * This is a stub to satisfy the Arduino IDE, the source code is in
  * the main.cpp file in the same directory.
