@@ -4,11 +4,11 @@
 
 ---
 
-**Code source qui accompagne [Coup d'oeil sur la carte de développement Super Mini ESP32-C3](https://sigmdel.ca/michel/ha/esp8266/super_mini_esp32c3_en.html).** Ce billet correspond à la version originale du référentiel datant du 14 octobre 2024. La version en anglais est à jour.
+**Code source qui accompagne [Coup d'oeil sur la carte de développement Super Mini ESP32-C3](https://sigmdel.ca/michel/ha/esp8266/super_mini_esp32c3_en.html).** Ce billet qui correspondait à la version originale du référentiel datant du 14 octobre 2024 est incomplet et en partie désuet. La version en anglais est à jour. (2026-04-02)
 
 ---
 
-***March 26, 2026***
+***April 2, 2026***
 
 Sketches in this repository use version 3.3.7 or better of the ESP32 Arduino core. 
 
@@ -36,8 +36,9 @@ A release and tag were created to easily recover the original 2024-10-14 release
   - [5.6. Wi-Fi connectivity sketches:](#56-wi-fi-connectivity-sketches)
   - [5.7. Bluetooth connectivity sketches:](#57-bluetooth-connectivity-sketches)
   - [5.8. Working example:](#58-working-example)
-- [6. Change Log](#6-change-log)
-- [7. Licence](#7-licence)
+- [6. To do](#6-to-do)
+- [7. Change Log](#7-change-log)
+- [8. Licence](#8-licence)
 
 <!-- /TOC -->
 
@@ -69,7 +70,6 @@ To compile a project in the piaorduino IDE extension (or maybe the PlatformIO ID
 ### 3.1. Board definition
 
 One important change with the older version of this repository is the choice of the Nologo esp32c3 Super Mini board definition. The definition is present in both the Arduino and pioarduino development environments which simplifies things. The pin definition file is simple and lean. Using the *no logo* definition seems appropriate because the first boards purchased did not have any identifying markings. Nologo or WmNo Logo or wmnologo or NologoTech is (or was) selling ESP32C3 Super Mini boards among many other development boards and other products. There's an extensive English language [ESP32C3SuperMini Getting Started](https://wiki.nologo.tech/en/product/esp32/esp32c3SuperMini/esp32C3SuperMini.html) Wiki and a small [repository on Github](https://github.com/NologoTech/ESP32C3-Supermini/). However, it is not clear if this enterprise is still in operation, the link to its Aliexpress store is broken and there has not been much activity in the GitHub site. 
-
 
 ### 3.2. Arduino IDE 
 
@@ -159,6 +159,20 @@ The projects can be grouped in categories.
 
 - **21_uart2** Test the UAR0 and UART1 peripherals of the ESP32-C3 with loop back tests.
 
+- **22_spi** Test the ESP32-C3 SPI peripheral with a loop back test.
+
+- **23_spi2** ESP32-C3 SPI loop back tests with 12 different pin assignements.
+
+- **24_spi_master** Test of SPI communication; SPI master device firmware.
+
+- **25_spi_slave** Test of SPI communication; SPI slave device firmware.
+
+- **26_i2c_ds3231** Test the ESP32-C3 I2C peripheral with an RTC/EEPROM module.
+
+- **27_i2c_oled** Test the I2C display of an ESP32-C3 Super Mini with onboard 0.42" OLED.
+
+**Note**: Projects 24_spi_master and 25_spi_slave are meant to be run on two ESP32-C3 based dev boards with their SPI signals, MISO, MOSI, SCLK and SS, connected to the same on the other board. In other words, MISO is connected to MISO and MOSI to MOSI, there is no flipping signals as when connecting two UARTs where TX is connected to RX.
+
 ### 5.6. Wi-Fi connectivity sketches:
 
 - **03_scan_wifi** Prints a list of available Wi-Fi networks every five seconds. Some Super Mini boards do not manage to find as many networks as others because of bad Wi-Fi performance. Edit `secrets.h.template` and save as `secrets.h` before compiling.
@@ -230,11 +244,21 @@ Perhaps this test was done incorrectly. Any help on this subject would be apprec
 
 - **06_async_web_led** Toggles the built-in LED on and off with a Web interface. It may be necessary to specify a valid Wi-Fi tx power as determined with the previous sketch. Edit `secrets.h.template` and save as `secrets.h` before compiling. Aside from setting the radio TX power and handling the fact that the built-in LED is active LOW, this project is the same as **05_async_web_led** in [xiao_esp32c3_sketches](https://github.com/sigmdel/xiao_esp32c3_sketches).
 
- 
-## 6. Change Log
+## 6. To do
+
+1. Modify 08_ble_led2 to handle setting BLE power level.
+
+1. Look at partitions as per [brighproject's Dec 2025 issue](issues/#3). 
+
+1. Eventually, verify if 07_ble_led with ArduinoBLE can be tweaked to work. 
+
+## 7. Change Log
 
 | Date | Change |
 | :---  |  :--- |
+| 2026-04-2 | Add 27_i2c_oled project and local modified copy of the 72x40oled_lib library |
+| 2026-04-1 | Add local copies of the ESP32SPISlave and DS3231 libraries |
+| 2026-04-1  | Add 22_spi, 23_spi2, 24_spi_master, 25_spi_slave and 26_i2c_ds3231 projects |
 | 2026-03-26 | Add 20_uart and 21_uart2 projects and update this README |
 | 2026-03-24 | Add 18_deep_sleep_tmr and 19_deep_sleep_io projects and update this README |
 | 2026-03-22 | Add 16_adc and 17_adcc projects |
@@ -253,7 +277,7 @@ Perhaps this test was done incorrectly. Any help on this subject would be apprec
 | 2024-06-21 | Updated to v3.0.1 esp32 Arduino core|
 | 2024-05-12 | Initial version | 
 
-## 7. Licence
+## 8. Licence
 
 Copyright 2024-2026, Michel Deslierres. No rights reserved. 
 
