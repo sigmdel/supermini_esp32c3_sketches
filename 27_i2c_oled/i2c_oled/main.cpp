@@ -152,25 +152,42 @@ void setup() {
   //display.setRotation(1);       // rotate display 90 degrees - will only see half of the [ Hello! ] box
   //display.setRotation(2);       // rotate display 180 degrees - will only see half of the [ Hello! ] box
   //display.setRotation(3);       // rotate display 270 degrees - will only see half of the [ Hello! ] box
-  //display.setBrightness(0x7F);    // medium brightness
-  display.setBrightness(0xFF);
+  //display.setBrightness(0x7F);  // medium brightness - default on reset/powering up
   display.drawString(20, 15, "Hello!", 5);
   display.drawRect(1, 1, 70, 38); //fill=false, invert=false)
   display.display();
 }
 
+const uint8_t levels = 4;
+const uint8_t contrast[levels] = {31, 63, 127, 255};
+
+void testContrast(void) {
+  for (int i=0; i < levels; i++) {
+    uint8_t cval = contrast[i];
+    display.setBrightness(cval);
+    Serial.printf("  Contrast: %3d (0x%02x)\n", cval, cval);
+    delay(3000);
+  }  
+  display.setBrightness(127); // back to default
+}
+
 void loop() {
-  Serial.println("Display: Normal");
-  delay(5000);
+  Serial.println("\nDisplay: Normal");
+  testContrast();
+
   // put the display to sleep to save power
   Serial.println("Display: Sleeping");
   display.sleep(true);
   delay(5000);
+
+  // back to normal for a short while
   Serial.println("Display: Normal");
   display.sleep(false);
-  delay(5000);
+  delay(1000);
+
+  // before inverting display
   Serial.println("Display: Inverted");
   display.invert(true);
-  delay(5000);
+  testContrast();
   display.invert(false);
 }
