@@ -1,5 +1,5 @@
 /*
- *  See spi.ino for license and attribution.
+ *  See spi2.ino for license and attribution.
  */
 
 #include <Arduino.h>
@@ -121,7 +121,7 @@ bool nextPad(void) {
 
   count = 0;               // reset message counter
 
-  Serial.println("\n\nInitializing SPI port...");
+  Serial.println("\n\nInitializing the SPI port...");
   //bool begin(int8_t sck = -1, int8_t miso = -1, int8_t mosi = -1, int8_t ss = -1);
   Serial.printf("    MOSI attached to pin %d as before\n", ALT_MOSI);
   Serial.printf("    MIS0 attached to pin %d\n", miso);
@@ -133,13 +133,13 @@ bool nextPad(void) {
     Serial.printf("  Setting SPI clock divider to %lu (SPI_CLOCK_DIV8)\n", (unsigned long)SPI_CLOCK_DIV8);
     #endif
     delay(100);
-    Serial.println("Successfully initialed the SPI port.");
+    Serial.println("Successfully initialized the SPI port.");
     Serial.printf("Connect gpio %d (MISO) to pin %d (MOSI) now.\n", iopins[misoIndex], ALT_MOSI);
     delay(INACTIVE_PERIOD);  // more time to switch pin
     activetimer = millis();  // reset active (spi messaging) timer
     return true;
   } else {
-    Serial.println("Unable to initialed the SPI port.");
+    Serial.println("Unable to initialize the SPI port.");
     activetimer = millis() + ACTIVE_PERIOD + 5;
     return false;
   }
@@ -163,8 +163,8 @@ void setup() {
   Serial.println();
   #endif  
 
-  Serial.println("\nProject: spi");
-  Serial.println("Purpose: SPI Loopback Test");
+  Serial.println("\nProject: spi2");
+  Serial.println("Purpose: SPI loopback tests with 12 different pin assignments");
   Serial.print(  "  Board: ");
   #ifdef ARDUINO_BOARD
   Serial.print(ARDUINO_BOARD);
@@ -180,8 +180,10 @@ void setup() {
       Serial.println("Warning: Expected the Nologo ESP32C3 Super Mini board definition");
   }
   #endif
+  SPI.begin();
   Serial.println();
   Serial.printf("Default SPI clock divider: %lu.\n\n", (unsigned long)SPI.getClockDivider());
+  SPI.end();
   Serial.println("In this test, the master out / slave in (MOSI) signal of the single SPI");
   Serial.printf("controller is attached to gpio pin %d, as the master in / slave out (MISO)\n", MISO);
   Serial.println("signal is attached to every other gpio pin available on the Super Mini");

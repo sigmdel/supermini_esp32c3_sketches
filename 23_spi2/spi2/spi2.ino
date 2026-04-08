@@ -1,5 +1,5 @@
 /*
- * spi.ino
+ * spi2.ino
  * SPI loopback tests with 12 different pin assignements
  *
  * This is a stub to satisfy the Arduino IDE, the source code is in
