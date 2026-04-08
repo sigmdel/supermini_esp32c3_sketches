@@ -84,7 +84,7 @@ void setup() {
   }
   #endif
   Serial.println();
-  Serial.println("Initializing SPI port as a master device");
+  Serial.println("Initializing the SPI port as a master device");
   Serial.printf("  Connect MOSI (master output pin %d) to MOSI of slave device\n", MOSI);
   Serial.printf("  Connect MISO (master input pin  %d) to MISO of slave device\n", MISO);
   Serial.printf("  Connect SCK  (clock pin  %d) to SCK of slave device\n", SCK);
@@ -94,7 +94,7 @@ void setup() {
   digitalWrite(SS, HIGH);                // disable chip select
   if (SPI.begin(SCK, MISO, MOSI, SS)) {
     //SPI.setDataMode(SPI_MODE0); // default
-    Serial.println("SPI port sucessfully initialized");
+    Serial.println("SPI port successfully initialized");
     Serial.printf("Default SPI clock divider: %lu\n", (unsigned long)SPI.getClockDivider());
     #ifdef CHANGE_CLOCK_DIVIDER
     SPI.setClockDivider(SPI_CLOCK_DIV8);   //divide the clock by 8
@@ -108,11 +108,6 @@ void setup() {
     ESP.restart();
   }
   delay(2000);
-  /*  
-  Serial.println("\nIt may be necessary to reset the board after the firmware is uploaded.");
-  Serial.println("Otherwise, it will seem as if the test fails.");
-  Serial.println("\nsetup() completed, starting loop back test.");
-  */
  }
 
 #define BUFFER_SIZE  32
@@ -130,7 +125,7 @@ void dumpBuffer(const char* msg, const uint8_t* buff) {
     else if (c == 0)
       Serial.print("\\0"); 
     else 
-      Serial.printf(" 0x%.2x ", c);
+      Serial.printf("0x%.2x ", c);
   }    
 }
 
@@ -148,9 +143,9 @@ void loop (void) {
 
   dumpBuffer("\nMaster transmitting", outBuffer);
   if (count & 1) 
-    Serial.println(" with transferBytes(outBuf, inBuf, size)");
+    Serial.println(" with transferBytes(outBuffer, inBuffer, 32)");
   else
-    Serial.println(" with transfer(outBuf, size)");
+    Serial.println(" with transfer(outBuffer, 32)");
   dumpBuffer("InBuffer before transmission", inBuffer);       
 
   digitalWrite(SS, LOW); // enable Slave Select 

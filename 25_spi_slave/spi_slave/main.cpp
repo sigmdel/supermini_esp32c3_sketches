@@ -80,7 +80,7 @@ void setup() {
   #endif
 
   Serial.println();
-  Serial.println("Initializing SPI port as a slave device");
+  Serial.println("Initializing the SPI port as a slave device");
   Serial.printf("  SPI bus (FSPI) : %d\n", FSPI);
   Serial.printf("  Connect MOSI (master output pin %d) to MOSI of master device\n", MOSI);
   Serial.printf("  Connect MISO (master input pin  %d) to MISO of master device\n", MISO);

@@ -17,7 +17,7 @@
  * Michel Deslierres
  * March 31, 2026
  *
- * Based on tranfer_one_by_one_slave.ino by hidekitai in the prerequiist ESP32SPISlave library
+ * Based on tranfer_one_by_one_slave.ino by hidekitai in the prerequisite ESP32SPISlave library
  * @ https://github.com/hideakitai/ESP32SPISlave/blob/main/examples/transfer_one_by_one/transfer_one_by_one_slave/transfer_one_by_one_slave.ino
  * 
  * Copyright 2026, Michel Deslierres. No rights reserved, this code is in the public domain.

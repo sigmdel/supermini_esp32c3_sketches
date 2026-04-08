@@ -76,7 +76,7 @@ void setup() {
   #endif
   Serial.println();
   Serial.println("Initializing SPI port");
-  Serial.printf("  MOSI (output pin): %d - connected to MISO (input put):  %d\n", MOSI, MISO);
+  Serial.printf("  MOSI (output pin): %d - connected to MISO (input pin):  %d\n", MOSI, MISO);
   Serial.printf("  MISO (input pin):  %d - connected to MOSI (output pin): %d\n", MISO, MOSI);
   Serial.printf("  SCK  (clock):      %d - not connected\n", SCK);
   Serial.printf("  SS   (select):     %d - not connected\n", SS);

@@ -25,12 +25,11 @@
 #define SCAN_12C_BUS
 ///
 ///  If this macro is defined, the DS3232 date and time will be
-///  set to the the sketch's compile date and time no matter
-///  what. If the macro is not defined, the RTC date and time 
-///  is set to the compile date and time unless the
-///  RTC is already running (i.e. has a year value not equal 
-///  to 0) and then the user can choose to manually enter 
-///  a date and time.
+///  set to the sketch's compile date and time no matter what. 
+///  If the macro is not defined, the RTC date and time is set to
+///  the compile date and time unless the RTC is already running 
+///  (i.e. its year value not equal to 0) and then the user can 
+///  choose to manually enter date and time.
 #define USE_COMPILE_TIME
 ///
 ///  Time between printing of the date/time to serial monitor
