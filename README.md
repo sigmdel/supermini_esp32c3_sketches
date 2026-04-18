@@ -8,7 +8,7 @@
 
 ---
 
-***April 2, 2026***
+***April 17, 2026***
 
 Sketches in this repository use version 3.3.7 or better of the ESP32 Arduino core. 
 
@@ -48,16 +48,17 @@ The Super Mini ESP32C3 boards are small simplified versions of the original Espr
 
 ## 2. Boards 
 
-- [Super Mini ESP32C3 Pinout](images/pinout_top_big_logo.png)
+- [Super Mini ESP32C3 Pinout](images/pinout_top_big.png)
 
 These boards measure 22x18 mm, 24x18 mm including the protruding USB-C connector. A standard 8 pin 0.1" header can be soldered on each side. Of these 16 pins, 3 are dedicated to power connections (GND, 3.3 volts and 5 volts). The remaining 13 pins are input/ouput connections to the microprocessor. The boards have two push buttons (reset and boot), two LEDs (one is a power indicator, the other is a user LED) and an onboard ceramic antenna. The bigger components on the top side are the SoC, the crystal oscillator and a voltage regulator. There are no components on the back side.
 
 There is a plus version which has an RGB user LED and a U.FL connector for an optional external antenna.
 
-- [Super Mini ESP32C3 with 0.42" OLED Pinout](images/pinout_oled_top_big_logo.png)
+- [Super Mini ESP32C3 with 0.42" OLED Pinout](images/pinout_oled_top_big.png)
 
 These boards have an onboard 0.42" OLED display and a different form factor: 25x21 mm, 27x21 mm taking into account the USB-C connector. The same SoC pads are brought out to the header pins, but their ordering is completely different. Most of the components, SoC, oscillator and so on, are on the back side of the board which makes it almost impossible to solder the board on top of a larger printed circuit board. Perhaps that's the reason there are no crenellated edge connectors.
 
+The A5 pin name is greyed out in the two pin images above because *the Digital Controller of SAR ADC2 cannot work.. It is suggested to use SAR ADC1* (Source: [ESP32-C3 Series SoC Errata v1.2](https://documentation.espressif.com/projects/esp-chip-errata/en/latest/esp32c3/03-errata-description/shared/sar-adc-adc2-not-work.html)). GPIO 5 is connected to ADC2, while GPIOs 0 to 4 are connected to ADC1.
 
 ## 3. Compiling the Example Sketches
 
@@ -171,7 +172,7 @@ The projects can be grouped in categories.
 
 - **27_i2c_oled** Test the I2C display of an ESP32-C3 Super Mini with onboard 0.42" OLED.
 
-**Note**: Projects 24_spi_master and 25_spi_slave are meant to be run on two ESP32-C3 based dev boards with their SPI signals, MISO, MOSI, SCLK and SS, connected to the same on the other board. In other words, MISO is connected to MISO and MOSI to MOSI, there is no flipping signals as when connecting two UARTs where TX is connected to RX.
+**Note**: Projects 24_spi_master and 25_spi_slave are meant to be run on two ESP32-C3 based dev boards with their SPI signals, MISO, MOSI, SCLK and SS, connected to the same signal on the other board. In other words, MISO is connected to MISO and MOSI to MOSI, there is no flipping signals as when connecting two UARTs where TX is connected to RX.
 
 ### 5.6. Wi-Fi connectivity sketches:
 
@@ -205,7 +206,7 @@ The long connect times for the XIAO ESP32C3 are surprising because it systematic
 
   - Bad design such as having the ceramic antenna too close to other components on the board or the presence of an impedance mismatch with the ceramic antenna.
 
-More details can be found in the section [6.4 Source of the Wi-Fi Problem](https://sigmdel.ca/michel/ha/esp8266/super_mini_esp32c3_en.html#antenna).
+More details can be found in the section [1.3 Source of the Wi-Fi Problem](https://sigmdel.ca/michel/ha/esp8266/super_mini_esp32c3_en.html#antenna).
 
 <!--
 Three conclusions can be drawn. 
@@ -256,6 +257,7 @@ Perhaps this test was done incorrectly. Any help on this subject would be apprec
 
 | Date | Change |
 | :---  |  :--- |
+| 2026-04-17 | Grey out A5 pin in diagrams |
 | 2026-04-2 | Add 27_i2c_oled project and local modified copy of the 72x40oled_lib library |
 | 2026-04-1 | Add local copies of the ESP32SPISlave and DS3231 libraries |
 | 2026-04-1  | Add 22_spi, 23_spi2, 24_spi_master, 25_spi_slave and 26_i2c_ds3231 projects |
