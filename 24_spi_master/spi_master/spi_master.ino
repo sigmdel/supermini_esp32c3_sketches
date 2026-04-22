@@ -1,5 +1,5 @@
 /*
- * spi.ino
+ * spi_master.ino
  * Test of SPI communication; SPI master device firmware
  *
  * This is a stub to satisfy the Arduino IDE, the source code is in
