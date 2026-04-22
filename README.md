@@ -8,7 +8,7 @@
 
 ---
 
-***April 17, 2026***
+***April 22, 2026***
 
 Sketches in this repository use version 3.3.7 or better of the ESP32 Arduino core. 
 
@@ -36,9 +36,10 @@ A release and tag were created to easily recover the original 2024-10-14 release
   - [5.6. Wi-Fi connectivity sketches:](#56-wi-fi-connectivity-sketches)
   - [5.7. Bluetooth connectivity sketches:](#57-bluetooth-connectivity-sketches)
   - [5.8. Working example:](#58-working-example)
-- [6. To do](#6-to-do)
-- [7. Change Log](#7-change-log)
-- [8. Licence](#8-licence)
+- [6. Projects for the ESP32-C3 Mini with 0.42" OLED Display](#6-projects-for-the-esp32-c3-mini-with-042-oled-display)
+- [7. To do](#7-to-do)
+- [8. Change Log](#8-change-log)
+- [9. Licence](#9-licence)
 
 <!-- /TOC -->
 
@@ -54,11 +55,11 @@ These boards measure 22x18 mm, 24x18 mm including the protruding USB-C connector
 
 There is a plus version which has an RGB user LED and a U.FL connector for an optional external antenna.
 
-- [Super Mini ESP32C3 with 0.42" OLED Pinout](images/pinout_oled_top_big.png)
+- [Mini ESP32C3 with 0.42" OLED Display Pinout](images/pinout_oled_top_big.png)
 
 These boards have an onboard 0.42" OLED display and a different form factor: 25x21 mm, 27x21 mm taking into account the USB-C connector. The same SoC pads are brought out to the header pins, but their ordering is completely different. Most of the components, SoC, oscillator and so on, are on the back side of the board which makes it almost impossible to solder the board on top of a larger printed circuit board. Perhaps that's the reason there are no crenellated edge connectors.
 
-The A5 pin name is greyed out in the two pin images above because *the Digital Controller of SAR ADC2 cannot work.. It is suggested to use SAR ADC1* (Source: [ESP32-C3 Series SoC Errata v1.2](https://documentation.espressif.com/projects/esp-chip-errata/en/latest/esp32c3/03-errata-description/shared/sar-adc-adc2-not-work.html)). GPIO 5 is connected to ADC2, while GPIOs 0 to 4 are connected to ADC1.
+The A5 pin name is greyed out in the two pin images above because *the Digital Controller of SAR ADC2 cannot work.. It is suggested to use SAR ADC1* (Source: [ESP32-C3 Series SoC Errata v1.2](https://documentation.espressif.com/projects/esp-chip-errata/en/latest/esp32c3/03-errata-description/shared/sar-adc-adc2-not-work.html)). In other words, **do not use A5 as an analogue input**; GPIO 5 is connected to ADC2, while GPIOs 0 to 4 are connected to ADC1.
 
 ## 3. Compiling the Example Sketches
 
@@ -245,7 +246,14 @@ Perhaps this test was done incorrectly. Any help on this subject would be apprec
 
 - **06_async_web_led** Toggles the built-in LED on and off with a Web interface. It may be necessary to specify a valid Wi-Fi tx power as determined with the previous sketch. Edit `secrets.h.template` and save as `secrets.h` before compiling. Aside from setting the radio TX power and handling the fact that the built-in LED is active LOW, this project is the same as **05_async_web_led** in [xiao_esp32c3_sketches](https://github.com/sigmdel/xiao_esp32c3_sketches).
 
-## 6. To do
+## 6. Projects for the ESP32-C3 Mini with 0.42" OLED Display
+
+A companion GitHub repository, [mini_esp32c3_oled_sketches](https://github.com/sigmdel/mini_esp32c3_oled_sketches), contains pioarduino projects showing how the I2C and SPI peripherals can be used simultaneously on the ESP32-C3 Mini with 0.42" OLED Display development board. Two different variant `pins_arduino.h` files are proposed along with two board definition manifests to facilitate this.
+
+Of course, this could be done with ESP32-C3 Super Mini and it would not require a new board definition or a new variant `pins_arduino.h`. Just use the source code from the Mini with OLED display examples with the `Nologo ESP32 C3 Super Mini` board definition.
+
+
+## 7. To do
 
 1. Modify 08_ble_led2 to handle setting BLE power level.
 
@@ -253,10 +261,11 @@ Perhaps this test was done incorrectly. Any help on this subject would be apprec
 
 1. Eventually, verify if 07_ble_led with ArduinoBLE can be tweaked to work. 
 
-## 7. Change Log
+## 8. Change Log
 
 | Date | Change |
 | :---  |  :--- |
+| 2026-04-22 | Link to mini_esp32c3_oled_sketches and small corrections |
 | 2026-04-17 | Grey out A5 pin in diagrams |
 | 2026-04-2 | Add 27_i2c_oled project and local modified copy of the 72x40oled_lib library |
 | 2026-04-1 | Add local copies of the ESP32SPISlave and DS3231 libraries |
@@ -279,7 +288,7 @@ Perhaps this test was done incorrectly. Any help on this subject would be apprec
 | 2024-06-21 | Updated to v3.0.1 esp32 Arduino core|
 | 2024-05-12 | Initial version | 
 
-## 8. Licence
+## 9. Licence
 
 Copyright 2024-2026, Michel Deslierres. No rights reserved. 
 
