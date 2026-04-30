@@ -8,7 +8,7 @@
 
 ---
 
-***April 22, 2026***
+***April 30, 2026***
 
 Sketches in this repository use version 3.3.7 or better of the ESP32 Arduino core. 
 
@@ -232,15 +232,10 @@ When deploying a board, it may be necessary to test it multiple times in the pos
 <!--
 The Super Mini C3 boards that were tested did not do well. Sometimes the connection between the microcontroller and the Android tablet would require a considerable amount of time. At other times, the tablet had to be almost touching the microcontroller for the connection to be made. It happened that a connection could not be established at all even if **LightBlue** had found the Super Mini when it scanned for devices. By contrast, the XIAO-ESP32C3 was dependable.-->
 
-- **08_ble_led2** This project is similar to the previous one except for the use of the BLE library instead of the ArduinoBLE library. The [BLE library](https://github.com/espressif/arduino-esp32/tree/master/libraries/BLE) included in the ESP32 core for Arduino was the creation of [Neil Kolban](https://github.com/nkolban/ESP32_BLE_Arduino). While in principle the BLE Tx power level could be modified in the hope of improving the performance of some Super Mini boards, problems have been encountered when setting the power level. Consequently, the project does not modify the default BT Tx power level.
+- **08_ble_led2** This project is similar to the previous one except for the use of the BLE library instead of the ArduinoBLE library. The [BLE library](https://github.com/espressif/arduino-esp32/tree/master/libraries/BLE) included in the ESP32 core for Arduino was the creation of [Neil Kolban](https://github.com/nkolban/ESP32_BLE_Arduino). 
 
 
-<!--
-This makes it possible to set the BLE power level. Unlike setting Wi-Fi TX (transmit) power, setting the BLE power level did not result in obvious improvements in Bluetooth connectivity. Only BLE power type `ESP_BLE_PWR_TYPE_DEFAULT` with power levels  -21dbm, -15dbm, -9dbm, -3dbm, +3dbm + 9dbm, +15dbm and +21dbm, were tested. BLE power settings are more complex than Wi-Fi transmit power settings, so there may be something to gain in investigating this further. 
-
-Perhaps this test was done incorrectly. Any help on this subject would be appreciated.
--->
-
+- **09_ble_led3** This project is similar to project 08_ble_led2 using the BLE library to make the Super Mini into a BLE on/off device. This version adds the ability to test the Bluetooth connection at all possible BLE Tx power levels: -24dbm, -21dbm, -18dbm, -15dbm, -12dbm, -6dbm, -3dbm, 0dbm, +3dbm, +6dbm, +9dbm, +12dbm, +15dbm, +18dbm. It seems that +20dbm (`ESP_PWR_LVL_P20`) cannot be set.
 
 ### 5.8. Working example:
 
@@ -255,8 +250,6 @@ Of course, this could be done with ESP32-C3 Super Mini and it would not require 
 
 ## 7. To do
 
-1. Modify 08_ble_led2 to handle setting BLE power level.
-
 1. Look at partitions as per [brighproject's Dec 2025 issue](issues/#3). 
 
 1. Eventually, verify if 07_ble_led with ArduinoBLE can be tweaked to work. 
@@ -265,6 +258,7 @@ Of course, this could be done with ESP32-C3 Super Mini and it would not require 
 
 | Date | Change |
 | :---  |  :--- |
+| 2026-04-30 | Add 09_ble_led3 project |
 | 2026-04-22 | Link to mini_esp32c3_oled_sketches and small corrections |
 | 2026-04-17 | Grey out A5 pin in diagrams |
 | 2026-04-2 | Add 27_i2c_oled project and local modified copy of the 72x40oled_lib library |
