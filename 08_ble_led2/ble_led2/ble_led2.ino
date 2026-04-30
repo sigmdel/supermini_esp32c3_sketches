@@ -1,7 +1,6 @@
 /*
  * ble_led2.ino
  * Turn on or off the builtin LED with a Bluetooth LE app
- * with included macro to set BLE power level.
  *
  * This is a stub to satisfy the Arduino IDE, the source code is in
  * the file main.cpp in the same directory.
@@ -19,4 +18,4 @@
  * Copyright 2024-2026, Michel Deslierres. No rights reserved, this code is in the public domain.
  * In those jurisdictions where this may be a problem, the BSD Zero Clause License applies.
  * <https://spdx.org/licenses/0BSD.html> */
- // SPDX-License-Identifier: 0BSD
+// SPDX-License-Identifier: 0BSD

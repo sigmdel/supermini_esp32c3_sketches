@@ -2,7 +2,7 @@
  *  See ble_led2.ino for license and attribution.
  */
 
- #include <Arduino.h>
+#include <Arduino.h>
 #include <BLEDevice.h>
 #include <BLEUtils.h>
 #include <BLEServer.h>
@@ -66,9 +66,6 @@ void setLed(int value) {
   #define CHARACTERISTIC_UUID "2BE2" //"00002BE2-0000-1000-8000-00805F9B34FB"  // Light Output
                             //"2BO5" //"00002B05-0000-1000-8000-00805F9B34FB"  // Power
 #endif
-
-// leave undefined to use default BLE power level
-//#define BLE_PWR_LEVEL  ESP_PWR_LVL_N21
 
 BLEServer *pServer = nullptr;
 BLECharacteristic *pCharacteristic = nullptr;
